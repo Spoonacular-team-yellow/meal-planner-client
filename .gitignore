@@ -1,19 +1,11 @@
 
 # Created by https://www.gitignore.io/api/node,macos,linux,windows,webstorm,visualstudiocode
 
-<<<<<<< HEAD
-# testing
-/coverage
-.env
-# production
-/build
-=======
 ### Linux ###
 *~
 
 # temporary files which can be created if a process still has a handle open of a deleted file
 .fuse_hidden*
->>>>>>> 5090e904126b8ddef2d7b87147bc698960cb994f
 
 # KDE directory preferences
 .directory
