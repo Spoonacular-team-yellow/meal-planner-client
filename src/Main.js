@@ -6,6 +6,9 @@ import React from "react";
 import Search from "./Search";
 import Results from "./Results";
 import axios from "axios";
+import { withAuth0 } from '@auth0/auth0-react';
+import RegisterModal from './RegisterModal';
+import { createHashRouter } from "react-router-dom";
 
 
 const SERVER = process.env.REACT_APP_SERVER;
@@ -15,7 +18,9 @@ class Main extends React.Component {
     super(props);
     this.state = {
       recipe: [],
-      searchData: ''
+      searchData: [],
+      showRegisterModal: false,
+      user: {}
     };
   }
 
@@ -53,7 +58,62 @@ class Main extends React.Component {
     console.log(e.target.value)
   }
 
+  createUser = async (username) => {
+    let newUser = {
+      username: username,
+      email: this.props.auth0.user.email,
+      recipes: []
+    }
+    let createdUser = await axios.post(`${process.env.REACT_APP_SERVER}/accounts`, newUser);
+    this.setState({
+      user: createdUser
+    });
+  }
 
+  checkUserExists= async() => {
+    let email = this.props.auth0.user.email;
+    let token = await this.getToken();
+    if (token) {
+      let config = {
+        method: 'get',
+        baseURL: process.env.REACT_APP_SERVER,
+        url: `/accounts/${email}`,
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      };
+      let userExists = await axios(config);
+      if (!userExists.data) {
+        this.toggleRegisterModal();
+        console.log(this.state.showRegisterModal);
+      } else {
+        this.setState({
+          user: userExists
+        })
+      }
+    } else {
+      alert('User is not logged in');
+    }
+  }
+
+  toggleRegisterModal = () => {
+    this.setState({
+      showRegisterModal: !this.state.showRegisterModal
+    });
+  }
+
+  getToken = async() => {
+    if (this.props.auth0.isAuthenticated) {
+      const response = await this.props.auth0.getIdTokenClaims();
+      return response.__raw;
+    } else {
+      return null;
+    }
+  }
+
+  componentDidMount() {
+    this.checkUserExists();
+  }
 
   render() {
     return (
@@ -63,9 +123,14 @@ class Main extends React.Component {
           getRecipe={this.getRecipe}
         />
         <Results />
+        <RegisterModal
+          showRegisterModal={this.state.showRegisterModal}
+          createUser={this.createUser}
+          toggleRegisterModal={this.toggleRegisterModal}
+        />
       </>
     );
   }
 }
 
-export default Main;
+export default withAuth0(Main);
