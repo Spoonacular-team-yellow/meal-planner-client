@@ -1,21 +1,65 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
-import Form from "react-bootstrap/Form";
-import { Badge } from "react-bootstrap";
-// import axios from "axios";
+// import Button from "react-bootstrap/Button";
+// import InputGroup from "react-bootstrap/InputGroup";
+// import Form from "react-bootstrap/Form";
+// import { Badge } from "react-bootstrap";
+import Search from "./Search";
+import Results from "./Results";
+import axios from "axios";
 
+
+const SERVER = process.env.REACT_APP_SERVER;
 class Main extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipe: [],
+      searchData: []
+    };
+  }
+
+  getRecipe = async () => {
+    let results = await axios.get(`${SERVER}/${this.state.searchData.toString}`);
+    this.setState({
+      recipe: results.data
+    })
+  }
+
+  postRecipe = async (newRecipe) => {
+    let url = `${SERVER}/${this.state.searchData.toString}`;
+    let createdRecipe = await axios.post(url, newRecipe);
+    this.setState({
+      recipe: [...this.state.recipe, createdRecipe.data]
+    })
+  }
+
+  deleteRecipe = async (id) => {
+    let url = `${SERVER}/${this.state.searchData.toString}/${id}`;
+    await axios.delete(url)
+    let updatedRecipe = this.state.recipe.filter(temp => temp._id !== id);
+    this.setState({
+      recipe: updatedRecipe
+    })
+  }
+
+  ingredientHandler = (e) => {
+    this.setState({
+      searchData: e.target.value
+    }, this.getRecipe);
+  }
+
+
+
   render() {
     return (
-      <InputGroup>
-        <InputGroup.Text>With textarea</InputGroup.Text>
-        <Form.Control as="textarea" aria-label="With textarea" />
-        <Button variant="primary">
-          Profile <Badge bg="secondary"></Badge>
-          <span className="visually-hidden">unread messages</span>
-        </Button>
-      </InputGroup>
+      <>
+        <Search
+          onSubmit={this.ingredientHandler}
+
+        />
+        <Results />
+      </>
     );
   }
 }

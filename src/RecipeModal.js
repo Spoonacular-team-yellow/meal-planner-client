@@ -1,19 +1,45 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 // import CloseButton from 'react-bootstrap/CloseButton';
-import Modal from "react-bootstrap/Modal";
-import Image from 'react-bootstrap/Image'
+import { Modal, /*Image,*/ Button } from "react-bootstrap/Modal";
 
-class TheModal extends React.Component{
+class RecipeModal extends React.Component{
+
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      addBook: false,
+      showModal: false,
+    };
+  }
+
+
+  handleShow = (e) => {
+    e.preventDefault();
+    this.setState({
+      addBook: true,
+      showModal: true,
+    });
+  };
+
+  handleHide = () => {
+    this.setState({
+      showModal: false,
+    });
+  };
+
+
+
   render(){
+
     return (
       <>
         <Modal
         //   size="lg"
         //   aria-labelledby="contained-modal-title-vcenter"
         //   centered
-        //   show={this.props.modalDisp}
-        //   onHide={this.props.stopDisp}
+        show={this.state.showModal} 
+        onHide={this.handleHide}
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
@@ -28,7 +54,7 @@ class TheModal extends React.Component{
           </Modal.Body>
           <Modal.Footer>
             <Button 
-            // onClick={this.props.stopDisp}
+            onHide={this.handleHide}
             >Close</Button>
           </Modal.Footer>
         </Modal>
@@ -37,4 +63,4 @@ class TheModal extends React.Component{
   }
 }
 
-export default TheModal;
+export default RecipeModal;
