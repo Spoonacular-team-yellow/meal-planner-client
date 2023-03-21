@@ -15,15 +15,17 @@ class Main extends React.Component {
     super(props);
     this.state = {
       recipe: [],
-      searchData: []
+      searchData: ''
     };
   }
 
-  getRecipe = async () => {
-    let results = await axios.get(`${SERVER}/${this.state.searchData.toString}`);
+  getRecipe = async (e) => {
+    e.preventDefault();
+    let results = /*await axios.get(`${SERVER}/${this.state.searchData}`);*/ this.state.searchData
+    console.log(results);
     this.setState({
       recipe: results.data
-    })
+    });
   }
 
   postRecipe = async (newRecipe) => {
@@ -44,9 +46,11 @@ class Main extends React.Component {
   }
 
   ingredientHandler = (e) => {
+    e.preventDefault();
     this.setState({
       searchData: e.target.value
-    }, this.getRecipe);
+    });
+    console.log(e.target.value)
   }
 
 
@@ -55,8 +59,8 @@ class Main extends React.Component {
     return (
       <>
         <Search
-          onSubmit={this.ingredientHandler}
-
+          ingredientHandler={this.ingredientHandler}
+          getRecipe={this.getRecipe}
         />
         <Results />
       </>
