@@ -1,26 +1,21 @@
 import React from "react";
-import Card from "react-bootstrap/Card";
+import RecipeCard from "./RecipeCard";
 
 class Results extends React.Component {
+  
   render() {
+    
     return (
       <>
-        <Card style={{ width: "18rem" }} className="m-1 d-inline-block">
-          <Card.Img
-            // variant="top"
-            // src={this.props.src}
-            // className="h-50"
-            // onClick={this.handleFavorites}
-          />
-          <Card.Body>
-            <Card.Title>
-                {/* {this.props.title} */}
-                </Card.Title>
-            <Card.Text>
-                {/* {this.state.desc} */}
-                </Card.Text>
-          </Card.Body>
-        </Card>
+        { this.props.recipes &&
+          <>
+          {
+            this.props.recipes.map((recipe, idx)=> {
+              return <RecipeCard key={recipe._id} recipe={recipe} />
+            })
+          }
+          </>
+        }
       </>
     );
   }
