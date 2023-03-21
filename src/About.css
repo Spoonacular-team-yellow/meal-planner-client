@@ -95,7 +95,6 @@
   body {
     background:linear-gradient(60deg,var(--dark-red),var(--dark-yellow),var(--dark-green),var(--dark-blue),var(--dark-blue));
     outline:2px solid var(--black);
-  
   }
   
   /* main {
