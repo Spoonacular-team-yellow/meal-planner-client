@@ -8,10 +8,8 @@ class Search extends React.Component {
 
     return (
       <>
-        <Form onSubmit={this.props.getRecipe}>
-          <Form.Group
-            onChange={this.props.ingredientHandler}
-            >
+        <Form onSubmit={this.props.getRecipe} onChange={this.props.ingredientHandler}>
+          <Form.Group>
             <Form.Label>Enter Ingredients</Form.Label>
             <Form.Control type='text' placeholder='Ex. Eggs' />
             <Form.Control type='text' placeholder='Ex. Bacon' />

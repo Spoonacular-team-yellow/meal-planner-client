@@ -26,7 +26,6 @@ class Main extends React.Component {
 
   getRecipe = async (e) => {
     e.preventDefault();
-    console.log('yo');
     let results = /*await axios.get(`${SERVER}/${this.state.searchData}`);*/ this.state.searchData
     console.log(results);
     this.setState({
@@ -52,9 +51,11 @@ class Main extends React.Component {
   }
 
   ingredientHandler = (e) => {
+    e.preventDefault();
     this.setState({
       searchData: e.target.value
-    }, this.getRecipe);
+    });
+    console.log(e.target.value)
   }
 
   createUser = async (username) => {
