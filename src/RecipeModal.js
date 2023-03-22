@@ -25,15 +25,46 @@ class RecipeModal extends React.Component {
           onHide={this.props.toggleRecipeModal}
         >
           <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-              {/* {this.props.beastToDisp.title} */}
-            </Modal.Title>
+            {this.props.selectedRecipe.title &&
+              <Modal.Title id="contained-modal-title-vcenter">
+                {this.props.selectedRecipe.title}
+              </Modal.Title>
+            }
+             <Button onClick={this.handleSave} variant="primary">Save Recipe</Button>{' '}
           </Modal.Header>
           <Modal.Body>
-            {/* <Image src={this.props.beastToDisp.image_url} alt="it not working" fluid/> */}
-            <p>
-              {/* {this.props.beastToDisp.description} */}
-            </p>
+            {this.props.selectedRecipe.title &&
+              <Image
+              src={this.props.selectedRecipe.image}
+              alt={this.props.selectedRecipe.title} 
+              fluid={true} 
+              />
+            }
+           <h2>Ingredients</h2>
+           <ul>
+            { this.props.selectedRecipe.extendedIngredients &&
+              <>
+                {this.props.selectedRecipe.extendedIngredients.map((ingredient, idx) =>{
+                  return(
+                    <li key={idx}>{ingredient.original}</li>
+                  )
+                })}
+              </>
+            }
+            </ul>
+            <h2>Instructions</h2>
+            <ol>
+              { this.props.selectedRecipe.analyzedInstructions &&
+                <>
+                {this.props.selectedRecipe.analyzedInstructions[0].steps.map((step, idx) => {
+                  return (
+                    <li key={idx}>{step.step}</li>
+                  )
+                })}
+                </>
+              }
+            </ol>
+
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleRecipeClick}>Add To List</Button>

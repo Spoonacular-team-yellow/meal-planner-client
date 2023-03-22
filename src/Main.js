@@ -1,8 +1,5 @@
 import React from "react";
-// import Button from "react-bootstrap/Button";
-// import InputGroup from "react-bootstrap/InputGroup";
-// import Form from "react-bootstrap/Form";
-// import { Badge } from "react-bootstrap";
+import Container from 'react-bootstrap/Container';
 import Search from "./Search";
 import Results from "./Results";
 // import App from "./App";
@@ -24,9 +21,44 @@ class Main extends React.Component {
       addRecipe: [],
       showRegisterModal: false,
       showRecipeModal: false,
-      user: {}
+      user: {},
+      token:'',
+      selectedRecipe: {},
     };
   }
+  getOneRecipe = async (id) => {
+    let config = {
+      method: 'get',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/recipes/${id}`,
+      headers: {
+        "Authorization": `Bearer ${this.state.token}`
+      }
+    }
+    let results = await axios (config);
+    this.setState({
+      selectedRecipe: results.data
+    })
+  } 
+
+  saveRecipe = async(recipe)=> {
+    console.log(recipe, "recipe")
+    let config = {
+      method: 'post',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/accounts/list/save${recipe.id}`,
+      params: {
+        ingredients: recipe
+      },
+      headers: {
+        "Authorization": `Bearer ${this.state.token}`
+      }}
+      let results = await axios(config);
+      
+    }
+  
+
+
 
   getRecipe = async (e) => {
     e.preventDefault();
@@ -35,17 +67,21 @@ class Main extends React.Component {
       e.target.ing2.value,
       e.target.ing3.value
     ].toString();
-    console.log(searchData)
-    let results = await axios.get(`${process.env.REACT_APP_SERVER}/recipes`,{ 
+    let config = {
+      method: 'get',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/recipes`,
       params: {
         ingredients: searchData
-      } 
-    });
-    console.log(results);
+      },
+      headers: {
+        "Authorization": `Bearer ${this.state.token}`
+      }
+    };
+    let results = await axios(config);
     this.setState({
       recipe: results.data
     });
-    console.log(results.data);
   }
 
   postRecipe = async (newRecipe) => {
