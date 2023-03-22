@@ -2,6 +2,7 @@ import React from "react";
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import Results from './Results';
+import './Account.css'
 
 
 class Account extends React.Component {
@@ -147,8 +148,8 @@ class Account extends React.Component {
 
     return (
       <>
-      <h2>{this.state.user.username}</h2>
-      <h2>Saved Recipes</h2>
+      <h2 className="username">{this.state.user.username}</h2>
+      <h2 className="srecipe">Saved Recipes</h2>
       <Results 
         recipes={this.state.user.recipes}
         isUserList={true}
