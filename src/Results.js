@@ -5,6 +5,7 @@ import RecipeModal from './RecipeModal';
 class Results extends React.Component {
   
   render() {
+    console.log(this.props.recipes)
     return (
       <>
         { this.props.recipes &&
@@ -15,12 +16,14 @@ class Results extends React.Component {
                       toggleRecipeModal={this.props.toggleRecipeModal} 
                       key={recipe.id} 
                       recipe={recipe}
+                      getOneRecipe={this.props.getOneRecipe}
                     />
             })
           }
            <RecipeModal 
             showRecipeModal={this.props.showRecipeModal}
             toggleRecipeModal={this.props.toggleRecipeModal}
+            selectedRecipe={this.props.selectedRecipe}
           />
           </>
         }

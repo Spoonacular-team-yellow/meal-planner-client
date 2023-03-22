@@ -3,6 +3,13 @@ import Card from "react-bootstrap/Card";
 
 class RecipeCard extends React.Component {
 
+    handleClick(){
+        this.props.getOneRecipe(this.props.recipe.id);
+        this.props.toggleRecipeModal();
+
+
+    }
+
     render(){
 
         return (

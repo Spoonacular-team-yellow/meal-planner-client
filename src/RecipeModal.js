@@ -1,9 +1,10 @@
 import React from "react";
 // import CloseButton from 'react-bootstrap/CloseButton';
-import { Modal, /*Image,*/ } from "react-bootstrap";
+import { Modal, Image } from "react-bootstrap";
 
 class RecipeModal extends React.Component{
   render(){
+    console.log(this.props.selectedRecipe)
     return (
       <>
         <Modal
@@ -12,6 +13,7 @@ class RecipeModal extends React.Component{
         //   centered
         show={this.props.showRecipeModal} 
         onHide={this.props.toggleRecipeModal}
+        // recipes={this.props.recipe}
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
@@ -19,7 +21,7 @@ class RecipeModal extends React.Component{
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {/* <Image src={this.props.beastToDisp.image_url} alt="it not working" fluid/> */}
+            {/* <Image src={this.props.toggleRegisterModal.image } alt="it not working" fluid/> */}
             <p>
               {/* {this.props.beastToDisp.description} */}
             </p>
