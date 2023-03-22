@@ -18,7 +18,8 @@ class Main extends React.Component {
       searchData: [],
       showRegisterModal: false,
       showRecipeModal: false,
-      user: {}
+      user: {},
+      token:''
     };
   }
 
@@ -29,17 +30,21 @@ class Main extends React.Component {
       e.target.ing2.value,
       e.target.ing3.value
     ].toString();
-    console.log(searchData)
-    let results = await axios.get(`${process.env.REACT_APP_SERVER}/recipes`,{ 
+    let config = {
+      method: 'get',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/recipes`,
       params: {
         ingredients: searchData
-      } 
-    });
-    console.log(results);
+      },
+      headers: {
+        "Authorization": `Bearer ${this.state.token}`
+      }
+    };
+    let results = await axios(config);
     this.setState({
       recipe: results.data
     });
-    console.log(results.data);
   }
 
   postRecipe = async (newRecipe) => {
@@ -120,6 +125,9 @@ class Main extends React.Component {
   getToken = async() => {
     if (this.props.auth0.isAuthenticated) {
       const response = await this.props.auth0.getIdTokenClaims();
+      this.setState({
+        token: response.__raw
+      });
       return response.__raw;
     } else {
       return null;
