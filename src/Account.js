@@ -2,18 +2,26 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
+import Results from './Results';
+import data from './test.json';
 
 class Account extends React.Component {
   constructor(props) {
     super(props);
     this.state ={
       user: {},
-      token: ''
+      token: '',
+      showCustomRecipeModal: false
     }
   }
 
+  toggleCustomRecipeModal = () => {
+    this.setState({
+      showCustomRecipeModal: !this.state.showCustomRecipeModal
+    });
+  }
+
   getUser = async () => {
-    console.log(this.state.token);
     let email = this.props.auth0.user.email;
     let config = {
       method: 'get',
@@ -46,11 +54,19 @@ class Account extends React.Component {
   }
 
   render() {
-    console.log(this.state.user);
+    let test_recipes = data;
     return (
       <>
       <h2>{this.state.user.username}</h2>
       <h2>Saved Recipes</h2>
+      <Results 
+        recipes={test_recipes}
+        isUserList={true}
+        toggleCustomRecipeModal={this.toggleCustomRecipeModal}
+        showCustomRecipeModal={this.state.showCustomRecipeModal}
+        setUserRecipe={this.setUserRecipe}
+        selectedUserRecipe={this.state.selectedUserRecipe}
+      />
       </>
     );
   }
