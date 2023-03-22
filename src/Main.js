@@ -38,6 +38,36 @@ class Main extends React.Component {
     })
   } 
 
+  saveRecipe = async(recipe)=> {
+
+    let recipeToSave = {
+      recipeId : recipe.id,
+      steps: recipe.analyzedInstructions,
+      ingredients: recipe.extendedIngredients,
+      imageUrl: recipe.image,
+      title: recipe.title,
+      readyInMinutes: recipe.readyInMinutes,
+      sourceUrl: recipe.sourceUrl,
+      sourceName: recipe.sourceName
+    }
+
+    let config = {
+      method: 'put',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/accounts/list/save/${this.props.auth0.user.email}`,
+      data: {
+        ingredients: recipeToSave
+      },
+      headers: {
+        "Authorization": `Bearer ${this.state.token}`
+      }}
+      let results = await axios(config);
+      console.log(results.data)
+    }
+  
+
+
+
   getRecipe = async (e) => {
     e.preventDefault();
     let searchData = [
@@ -84,7 +114,7 @@ class Main extends React.Component {
     this.setState({
       searchData: e.target.value
     });
-    console.log(e.target.value)
+
   }
 
   createUser = async (username) => {
@@ -124,7 +154,6 @@ class Main extends React.Component {
       let userExists = await axios(config);
       if (!userExists.data) {
         this.toggleRegisterModal();
-        console.log(this.state.showRegisterModal);
       } else {
         this.setState({
           user: userExists
@@ -164,6 +193,7 @@ class Main extends React.Component {
   }
 
   render() {
+
     return (
       <>
         <Container>
@@ -177,6 +207,7 @@ class Main extends React.Component {
             recipes={this.state.recipe}
             selectedRecipe={this.state.selectedRecipe}
             getOneRecipe={this.getOneRecipe}
+            saveRecipe={this.saveRecipe}
           />
           <RegisterModal
             showRegisterModal={this.state.showRegisterModal}
