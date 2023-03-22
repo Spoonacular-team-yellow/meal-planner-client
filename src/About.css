@@ -13,40 +13,44 @@
   }
 
   
-  @keyframes animate {
+  /* @keyframes animate {
     100% {
       transform: translate(-100%, 0);
     }
-  }
+  } */
   
-.div-content {
-  margin: 1rem;
+section {
+  margin: 2rem 0;
 }
   
 .about-content {
     background:linear-gradient(60deg,var(--dark-red),var(--dark-yellow),var(--dark-green),var(--dark-blue),var(--dark-blue));
-    /* outline:2px solid var(--black); */
+    padding: 1rem;
   }
   
 
 
+  /* .img-bio {
+    
+  } */
   
-  .bioSection h2 {
-    font-size:1.5em;
-    line-height: 1.1em;
-    grid-area: 1 / 1 / 2 / 2;
-    text-align:right;
-    padding-left: 100px;
-  }
+  /* .bioSection h2 {
+    /* font-size:1.5em; */
+    /* line-height: 1.1em; */
+    /* grid-area: 1 / 1 / 2 / 2; */
+    /* text-align:right; */
+    /* padding-left: 100px; */
+  /* } */ 
   
   section img {
-    width:150px;
-    height:150px;
+    width:250px;
+    height:250px;
     object-fit:cover;
     /* border:2px solid brown; */
-    grid-area: 1 / 2 / 2 / 3;
+    /* grid-area: 1 / 2 / 2 / 3; */
     animation:border 10s infinite;
     border-radius:10%;
+    /* margin */
   }
   
   @keyframes border {
@@ -58,5 +62,5 @@
   
   p {
     grid-area: 1 / 3 / 2 / 7;
-    padding-left: 10px;
+    /* padding-left: 10px; */
   }
