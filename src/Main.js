@@ -20,6 +20,7 @@ class Main extends React.Component {
       recipe: [],
       searchData: [],
       showRegisterModal: false,
+      showRecipeModal: false,
       user: {}
     };
   }
@@ -32,7 +33,11 @@ class Main extends React.Component {
       e.target.ing3.value
     ].toString();
     console.log(searchData)
-    let results = await axios.get(`${SERVER}/recipes`,{ params: {ingredients: searchData} });
+    let results = await axios.get(`${process.env.REACT_APP_SERVER}/recipes`,{ 
+      params: {
+        ingredients: searchData
+      } 
+    });
     console.log(results);
     this.setState({
       recipe: results.data
@@ -109,6 +114,12 @@ class Main extends React.Component {
     });
   }
 
+  toggleRecipeModal = () => {
+    this.setState({
+      showRecipeModal: !this.state.showRecipeModal
+    })
+  }
+
   getToken = async() => {
     if (this.props.auth0.isAuthenticated) {
       const response = await this.props.auth0.getIdTokenClaims();
@@ -129,7 +140,11 @@ class Main extends React.Component {
           // ingredientHandler={this.ingredientHandler}
           getRecipe={this.getRecipe}
         />
-        <Results />
+        <Results 
+          toggleRecipeModal={this.toggleRecipeModal}
+          showRecipeModal={this.state.showRecipeModal}
+          recipes={this.state.recipe}
+        />
         <RegisterModal
           showRegisterModal={this.state.showRegisterModal}
           createUser={this.createUser}
