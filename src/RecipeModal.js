@@ -20,7 +20,6 @@ class RecipeModal extends React.Component{
         // recipes={this.props.recipe}
         >
           <Modal.Header closeButton>
-
             {this.props.selectedRecipe.title &&
               <Modal.Title id="contained-modal-title-vcenter">
                 {this.props.selectedRecipe.title}
