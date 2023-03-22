@@ -16,8 +16,6 @@ import './App.css';
 
 class App extends React.Component {
   render() {
-    // console.log(this.props);
-    console.log(process.env.REACT_APP_AUTH0_DOMAIN)
 
     return (
       <>
@@ -26,7 +24,7 @@ class App extends React.Component {
           <Routes>
           <Route 
               exact path="/"
-              element={this.props.auth0.isAuthenticated ? <Main/> : <LoginPage />}
+              element={this.props.auth0.isAuthenticated ? <Main auth={this.props.auth0}/> : <LoginPage />}
             >
             </Route>
             <Route 
