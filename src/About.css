@@ -21,13 +21,14 @@
   
 section {
   margin: 2rem 0;
+  display: flex;
 }
-  
+/*   
 .about-content {
     background:linear-gradient(60deg,var(--dark-red),var(--dark-yellow),var(--dark-green),var(--dark-blue),var(--dark-blue));
     padding: 1rem;
   }
-  
+   */
 
 
   /* .img-bio {
