@@ -55,13 +55,26 @@ section {
   }
   
   @keyframes border {
-    0%  {outline:5px solid var(--dark-blue);}
+    /* 0%  {outline:5px solid var(--dark-blue);}
     33% {outline:5px solid var(--dark-green);}
     66% {outline:5px solid var(--dark-red);}
-    100% {outline:5px solid var(--dark-blue);}
+    100% {outline:5px solid var(--dark-blue);} */
   } 
   
   p {
     grid-area: 1 / 3 / 2 / 7;
     /* padding-left: 10px; */
   }
+
+  .textcol {
+    color: black;
+    background-color: #d4d7dc;
+    padding: 10px;
+    border-radius: 12px;  }
+
+    .abtus {
+      display: flex;
+      justify-content: center;
+      font-size: 5rem;
+    }
+    
