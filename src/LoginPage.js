@@ -1,8 +1,7 @@
 import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import LoginButton from './LoginButton';
-import './LoginPage.css';
-import LogoutButton from './LogoutButton';
+
 
 class LoginPage extends React.Component {
     render() {

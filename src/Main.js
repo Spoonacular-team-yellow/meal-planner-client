@@ -5,7 +5,7 @@ import Results from "./Results";
 import axios from "axios";
 import { withAuth0 } from '@auth0/auth0-react';
 import RegisterModal from './RegisterModal';
-//import { createHashRouter } from "react-router-dom";
+
 
 
 const SERVER = process.env.REACT_APP_SERVER;
@@ -104,9 +104,7 @@ class Main extends React.Component {
       }
     };
     let createdUser = await axios(config);
-    // this.setState({
-    //   user: createdUser
-    // });
+    console.log('user created: ', createdUser)
   }
 
   checkUserExists= async() => {
@@ -168,7 +166,6 @@ class Main extends React.Component {
       <>
         <Container>
           <Search
-            // ingredientHandler={this.ingredientHandler}
             getRecipe={this.getRecipe}
           />
           <Results 
