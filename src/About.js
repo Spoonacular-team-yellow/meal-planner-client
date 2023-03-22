@@ -1,18 +1,37 @@
 import { Component } from "react";
 // import Image from 'react-bootstrap/Image'
+import About from "./About.css"
 
 class Profile extends Component {
 
   render() {
     /* TODO: render information about the developers */
     return(
-    <>
+      <>
     <h1>About us:</h1>
     <>
-        <p>Phillip Chaplin - Phillip Chaplin is a software developer with two years experience working with python, django and AWS.  His background in automation and controls informs his logical approach to developing websites that meet customer demands. After two years  His quest for knowledge and adaptability to any situation has contributed to his most recent success working for Practical Computing Solutions. </p>
-        <p>Daniel Yoon - I’m currently a Software Developer specializing in web applications. I build useful and visually appealing tools using modern Javascript libraries such as React. Previously, I used to work in roles involving logistics and retail. Working with clients and teams across different businesses has helped me gain a sense of the kind of needs and expectations that users have for different industries and platforms. I'm excited to work on projects that make a strong impact on the world. </p>
-        <p>Joel Myrtil - </p>
-        <p>Ahmed Mohamed - </p>
+      <section>
+      <h2 class="bioHeader">Phillip Chaplin</h2>
+        <img src='../img/Phillip.jpeg'/>
+        <p>A software developer with two years experience working with python, django and AWS.  His background in automation and controls informs his logical approach to developing websites that meet customer demands. After two years  His quest for knowledge and adaptability to any situation has contributed to his most recent success working for Practical Computing Solutions. </p>
+      </section>
+      <section>
+      <h2 class="bioHeader">Daniel Yoon</h2>
+      <img src='../img/DanieImg.jpeg'/>
+        <p>I’m currently a Software Developer specializing in web applications. I build useful and visually appealing tools using modern Javascript libraries such as React. Previously, I used to work in roles involving logistics and retail. Working with clients and teams across different businesses has helped me gain a sense of the kind of needs and expectations that users have for different industries and platforms. I'm excited to work on projects that make a strong impact on the world. </p>
+      </section>
+
+      <section>
+      <h2 class="bioHeader">Joel Myrtil</h2>
+      <img src='../img/Joelmg.jpeg'/>
+        <p>Dedicated technician/maintenance professional aspiring to become a Software Developer, with a history of meeting company goals utilizing consistent and organized practices.</p>
+      </section>
+
+      <section>
+      <h2 class="bioHeader">Ahmed Mohamed</h2>
+      <img src='../img/ahmedImg.jpeg'/>
+        <p>Aspiring web developer. He has previous experience in IT, where he dealt with troublshooting hardware and softeware issues. He want to be apart of building something great. </p>
+      </section>
         </>
     </>
     )
