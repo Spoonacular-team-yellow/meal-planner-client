@@ -1,0 +1,10 @@
+.username {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.srecipe {
+  display: flex;
+  justify-content: center;
+  font-size: 4rem;
+}
