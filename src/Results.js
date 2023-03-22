@@ -21,6 +21,8 @@ class Results extends React.Component {
            <RecipeModal 
             showRecipeModal={this.props.showRecipeModal}
             toggleRecipeModal={this.props.toggleRecipeModal}
+            recipes={this.props.recipes}
+            postRecipe={this.props.postRecipe}
           />
           </>
         }

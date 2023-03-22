@@ -5,9 +5,11 @@ import React from "react";
 // import { Badge } from "react-bootstrap";
 import Search from "./Search";
 import Results from "./Results";
+// import App from "./App";
 import axios from "axios";
 import { withAuth0 } from '@auth0/auth0-react';
 import RegisterModal from './RegisterModal';
+import LogoutButton from "./LogoutButton";
 //import { createHashRouter } from "react-router-dom";
 
 
@@ -19,6 +21,7 @@ class Main extends React.Component {
     this.state = {
       recipe: [],
       searchData: [],
+      addRecipe: [],
       showRegisterModal: false,
       showRecipeModal: false,
       user: {}
@@ -46,19 +49,19 @@ class Main extends React.Component {
   }
 
   postRecipe = async (newRecipe) => {
-    let url = `${SERVER}/${this.state.searchData.toString}`;
-    let createdRecipe = await axios.post(url, newRecipe);
+    let url = `${SERVER}/${this.state.searchData}`;
+    let createdRecipe = await axios.put(url, newRecipe);
     this.setState({
-      recipe: [...this.state.recipe, createdRecipe.data]
+      addRecipe: [...this.state.recipe, createdRecipe.data]
     })
   }
 
   deleteRecipe = async (id) => {
-    let url = `${SERVER}/${this.state.searchData.toString}/${id}`;
+    let url = `${SERVER}/${this.state.searchData}/${id}`;
     await axios.delete(url)
     let updatedRecipe = this.state.recipe.filter(temp => temp._id !== id);
     this.setState({
-      recipe: updatedRecipe
+      addRecipe: updatedRecipe
     })
   }
 
@@ -80,34 +83,43 @@ class Main extends React.Component {
     this.setState({
       user: createdUser
     });
+    console.log(createdUser);
   }
 
-  checkUserExists= async() => {
-    let email = this.props.auth0.user.email;
-    let token = await this.getToken();
-    if (token) {
-      let config = {
-        method: 'get',
-        baseURL: process.env.REACT_APP_SERVER,
-        url: `/accounts/${email}`,
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
-      };
-      let userExists = await axios(config);
-      if (!userExists.data) {
-        this.toggleRegisterModal();
-        console.log(this.state.showRegisterModal);
-      } else {
-        this.setState({
-          user: userExists
-        })
-      }
-    } else {
-      alert('User is not logged in');
-    }
-  }
-
+  // checkUserExists= async() => {
+  //   let email = this.props.auth0.user.email;
+  //   let token = await this.getToken();
+  //   if (token) {
+  //     let config = {
+  //       method: 'get',
+  //       baseURL: process.env.REACT_APP_SERVER,
+  //       url: `/accounts/${email}`,
+  //       headers: {
+  //         "Authorization": `Bearer ${token}`
+  //       }
+  //     };
+  //     let userExists = await axios(config);
+  //     if (!userExists.data) {
+  //       this.toggleRegisterModal();
+  //       console.log(this.state.showRegisterModal);
+  //     } else {
+  //       this.setState({
+  //         user: userExists
+  //       })
+  //     }
+  //   } else {
+  //     alert('User is not logged in');
+  //   }
+  // }
+  
+  // getToken = async() => {
+  //   if (this.props.auth0.isAuthenticated) {
+  //     const response = await this.props.auth0.getIdTokenClaims();
+  //     return response.__raw;
+  //   } else {
+  //     return null;
+  //   }
+  // }
   toggleRegisterModal = () => {
     this.setState({
       showRegisterModal: !this.state.showRegisterModal
@@ -119,23 +131,14 @@ class Main extends React.Component {
       showRecipeModal: !this.state.showRecipeModal
     })
   }
+  
 
-  getToken = async() => {
-    if (this.props.auth0.isAuthenticated) {
-      const response = await this.props.auth0.getIdTokenClaims();
-      return response.__raw;
-    } else {
-      return null;
-    }
-  }
 
-  componentDidMount() {
-    this.checkUserExists();
-  }
 
   render() {
     return (
       <>
+      {/* <App/> */}
         <Search
           // ingredientHandler={this.ingredientHandler}
           getRecipe={this.getRecipe}
@@ -144,12 +147,14 @@ class Main extends React.Component {
           toggleRecipeModal={this.toggleRecipeModal}
           showRecipeModal={this.state.showRecipeModal}
           recipes={this.state.recipe}
+          postRecipe={this.postRecipe}
         />
         <RegisterModal
           showRegisterModal={this.state.showRegisterModal}
           createUser={this.createUser}
           toggleRegisterModal={this.toggleRegisterModal}
         />
+        <LogoutButton>LogOut</LogoutButton>
       </>
     );
   }
