@@ -1,15 +1,14 @@
 import { Component } from "react";
 // import Image from 'react-bootstrap/Image'
-import About from "./About.css"
+import "./About.css"
 
 class Profile extends Component {
 
   render() {
     /* TODO: render information about the developers */
     return(
-      <>
-    <h1>About us:</h1>
-    <>
+    <div className="about-content">
+      <h1>About us:</h1>
       <section>
       <h2 class="bioHeader">Phillip Chaplin</h2>
         <img src='../img/Phillip.jpeg'/>
@@ -32,8 +31,7 @@ class Profile extends Component {
       <img src='../img/ahmedImg.jpeg'/>
         <p>Aspiring web developer. He has previous experience in IT, where he dealt with troublshooting hardware and softeware issues. He want to be apart of building something great. </p>
       </section>
-        </>
-    </>
+    </div>
     )
   }
 };
