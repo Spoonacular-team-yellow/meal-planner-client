@@ -8,7 +8,7 @@ import Results from "./Results";
 import axios from "axios";
 import { withAuth0 } from '@auth0/auth0-react';
 import RegisterModal from './RegisterModal';
-import { createHashRouter } from "react-router-dom";
+//import { createHashRouter } from "react-router-dom";
 
 
 const SERVER = process.env.REACT_APP_SERVER;
@@ -20,17 +20,29 @@ class Main extends React.Component {
       recipe: [],
       searchData: [],
       showRegisterModal: false,
+      showRecipeModal: false,
       user: {}
     };
   }
 
   getRecipe = async (e) => {
     e.preventDefault();
-    let results = /*await axios.get(`${SERVER}/${this.state.searchData}`);*/ this.state.searchData
+    let searchData = [
+      e.target.ing1.value,
+      e.target.ing2.value,
+      e.target.ing3.value
+    ].toString();
+    console.log(searchData)
+    let results = await axios.get(`${process.env.REACT_APP_SERVER}/recipes`,{ 
+      params: {
+        ingredients: searchData
+      } 
+    });
     console.log(results);
     this.setState({
       recipe: results.data
     });
+    console.log(results.data);
   }
 
   postRecipe = async (newRecipe) => {
@@ -102,6 +114,12 @@ class Main extends React.Component {
     });
   }
 
+  toggleRecipeModal = () => {
+    this.setState({
+      showRecipeModal: !this.state.showRecipeModal
+    })
+  }
+
   getToken = async() => {
     if (this.props.auth0.isAuthenticated) {
       const response = await this.props.auth0.getIdTokenClaims();
@@ -119,10 +137,14 @@ class Main extends React.Component {
     return (
       <>
         <Search
-          ingredientHandler={this.ingredientHandler}
+          // ingredientHandler={this.ingredientHandler}
           getRecipe={this.getRecipe}
         />
-        <Results />
+        <Results 
+          toggleRecipeModal={this.toggleRecipeModal}
+          showRecipeModal={this.state.showRecipeModal}
+          recipes={this.state.recipe}
+        />
         <RegisterModal
           showRegisterModal={this.state.showRegisterModal}
           createUser={this.createUser}
