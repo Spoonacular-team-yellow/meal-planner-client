@@ -9,6 +9,7 @@ import About from './About';
 import LoginPage from './LoginPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { withAuth0 } from '@auth0/auth0-react';
+import Account from './Account';
 // import Results from './Results';
 
 import './App.css';
@@ -30,7 +31,10 @@ class App extends React.Component {
             </Route>
             <Route 
             path="/about"
-            element={<About/>}/>
+            element={this.props.auth0.isAuthenticated ? <About/> : <LoginPage />}/>
+             <Route 
+            path="/account"
+            element={this.props.auth0.isAuthenticated ? <Account/> : <LoginPage />}/>
             
           </Routes>
           <Footer />

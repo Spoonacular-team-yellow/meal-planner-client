@@ -93,10 +93,20 @@ class Main extends React.Component {
       email: this.props.auth0.user.email,
       recipes: []
     }
-    let createdUser = await axios.post(`${process.env.REACT_APP_SERVER}/accounts`, newUser);
-    this.setState({
-      user: createdUser
-    });
+    console.log(newUser);
+    let config = {
+      method: 'post',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/accounts`,
+      data: newUser,
+      headers: {
+        "Authorization": `Bearer ${this.state.token}`
+      }
+    };
+    let createdUser = await axios(config);
+    // this.setState({
+    //   user: createdUser
+    // });
   }
 
   checkUserExists= async() => {
