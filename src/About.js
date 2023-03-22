@@ -45,7 +45,7 @@ class Profile extends Component {
                 <img className="mx-2" src='../img/ahmedImg.jpeg'/>
                 <div className="d-flex flex-column px-5">
                   <h2 className="bioHeader">Ahmed Mohamed</h2>
-                  <p>Aspiring web developer. He has previous experience in IT, where he dealt with troublshooting hardware and softeware issues. He want to be apart of building something great. </p>
+                  <p>Software developer. He has previous experience in IT, where he dealt with troublshooting hardware and softeware issues. He want to be apart of building something great. </p>
                 </div>
               </div>
           </section>            

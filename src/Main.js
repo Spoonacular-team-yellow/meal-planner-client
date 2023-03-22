@@ -38,6 +38,25 @@ class Main extends React.Component {
     })
   } 
 
+  saveRecipe = async(recipe)=> {
+    console.log(recipe, "recipe")
+    let config = {
+      method: 'post',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/accounts/list/save${recipe.id}`,
+      params: {
+        ingredients: recipe
+      },
+      headers: {
+        "Authorization": `Bearer ${this.state.token}`
+      }}
+      let results = await axios(config);
+      
+    }
+  
+
+
+
   getRecipe = async (e) => {
     e.preventDefault();
     let searchData = [
@@ -167,6 +186,7 @@ class Main extends React.Component {
             recipes={this.state.recipe}
             selectedRecipe={this.state.selectedRecipe}
             getOneRecipe={this.getOneRecipe}
+            saveRecipe={this.saveRecipe}
           />
           <RegisterModal
             showRegisterModal={this.state.showRegisterModal}

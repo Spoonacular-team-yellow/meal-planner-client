@@ -28,6 +28,7 @@ class Results extends React.Component {
             showRecipeModal={this.props.showRecipeModal}
             toggleRecipeModal={this.props.toggleRecipeModal}
             selectedRecipe={this.props.selectedRecipe}
+            saveRecipe={this.props.saveRecipe}
           />
           </>
         }
