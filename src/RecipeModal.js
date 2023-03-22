@@ -1,9 +1,11 @@
 import React from "react";
 // import CloseButton from 'react-bootstrap/CloseButton';
-import { Modal, /*Image,*/ } from "react-bootstrap";
+import { Modal, Image } from "react-bootstrap";
 
 class RecipeModal extends React.Component{
   render(){
+    console.log(this.props.selectedRecipe,'yo')
+    console.log(this.props.selectedRecipe.extendedIngredients, 'this one')
     return (
       <>
         <Modal
@@ -12,17 +14,44 @@ class RecipeModal extends React.Component{
         //   centered
         show={this.props.showRecipeModal} 
         onHide={this.props.toggleRecipeModal}
+        // recipes={this.props.recipe}
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              {/* {this.props.beastToDisp.title} */}
+              {this.props.selectedRecipe.title}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {/* <Image src={this.props.beastToDisp.image_url} alt="it not working" fluid/> */}
-            <p>
-              {/* {this.props.beastToDisp.description} */}
-            </p>
+            <Image
+            src={this.props.selectedRecipe.image}
+            alt={this.props.selectedRecipe.title} 
+            fluid={true} 
+            />
+           <h2>Ingredients</h2>
+           <ul>
+            { this.props.selectedRecipe.extendedIngredients &&
+              <>
+                {this.props.selectedRecipe.extendedIngredients.map((ingredient, idx) =>{
+                  return(
+                    <li key={idx}>{ingredient.original}</li>
+                  )
+                })}
+              </>
+            }
+            </ul>
+            <h2>Instructions</h2>
+            <ol>
+              { this.props.selectedRecipe.analyzedInstructions &&
+                <>
+                {this.props.selectedRecipe.analyzedInstructions[0].steps.map((step, idx) => {
+                  return (
+                    <li key={idx}>{step.step}</li>
+                  )
+                })}
+                </>
+              }
+            </ol>
+
           </Modal.Body>
           <Modal.Footer>
           </Modal.Footer>

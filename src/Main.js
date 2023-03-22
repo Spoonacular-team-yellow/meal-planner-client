@@ -19,9 +19,24 @@ class Main extends React.Component {
       showRegisterModal: false,
       showRecipeModal: false,
       user: {},
-      token:''
+      token:'',
+      selectedRecipe: {},
     };
   }
+  getOneRecipe = async (id) => {
+    let config = {
+      method: 'get',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: '/recipes/id',
+      headers: {
+        "Authorization": `Bearer ${this.state.token}`
+      }
+    }
+    let results = await axios (config);
+    this.setState({
+      selectedRecipe: results.data
+    })
+  } 
 
   getRecipe = async (e) => {
     e.preventDefault();
