@@ -6,9 +6,6 @@ class RecipeCard extends React.Component {
     handleClick = () => { 
         this.props.getOneRecipe(this.props.recipe.id);
         this.props.toggleRecipeModal();
-        console.log(this.props.recipe.id,'here')
-
-
     }
 
     render(){

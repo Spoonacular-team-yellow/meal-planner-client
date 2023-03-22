@@ -1,7 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import { Button } from 'react-bootstrap';
-//import { Route, Router, Routes } from 'react-router';
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Header from './Header';
 import axios from 'axios';
 import Footer from './Footer';
@@ -11,84 +9,55 @@ import LoginPage from './LoginPage';
 import Account from './Account';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { withAuth0 } from '@auth0/auth0-react';
-// import Results from './Results';
+import Account from './Account';
+import axios from 'axios';
+
 
 import './App.css';
 
 
 const SERVER = process.env.REACT_APP_SERVER;
 class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {},
-      doesUserExist: false
-    };
-  }
-
-  updateRecipe = async (storeRecipe) => {
-    try {
-      let url = `${SERVER}/recipes/${storeRecipe.id}`;
-      console.log(storeRecipe);
-      let storedRecipeServer = await axios.put(url, storeRecipe)
-      let updatedBooks = this.state.books.map((book) => {
-        return book._id === storeRecipe._id
-          ? storedRecipeServer.data
-          : book;
-      });
-      this.setState({
-        books: updatedBooks,
-      })
-    } catch (err) {
-      console.log(`Error: ${err}`);
-    }
-  }
-
-  createUser = async (username) => {
-    let newUser = {
-      username: username,
-      email: this.props.auth0.user.email,
-      recipes: []
-    }
-    let createdUser = await axios.post(`${process.env.REACT_APP_SERVER}/accounts`, newUser);
-    this.setState({
-      user: createdUser
-    });
-  }
-
-  checkUserExists = async () => {
-    let email = this.props.auth0.user.email;
+  saveRecipe = async(recipe)=> {
     let token = await this.getToken();
-    console.log(token);
-    if (token) {
-      let config = {
-        method: 'get',
-        baseURL: process.env.REACT_APP_SERVER,
-        url: `/accounts/${email}`,
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
-      };
-      let userExists = await axios(config);
-      if (!userExists.data) {
-        // this.toggleRegisterModal();
-        // console.log(this.state.showRegisterModal);
-        console.log('hu');
-      } else {
-        this.setState({
-          user: userExists,
-          doesUserExist: true
-        })
-        console.log('hi');
-      }
-    } else {
-      alert('User is not logged in');
+    let recipeToSave = Object.hasOwn(recipe, '_id') ?
+    {
+      recipeId : recipe.recipeId,
+      steps: recipe.steps,
+      ingredients: recipe.ingredients,
+      imageUrl: recipe.imageUrl,
+      title: recipe.title,
+      readyInMinutes: recipe.readyInMinutes,
+      sourceUrl: recipe.sourceUrl,
+      sourceName: recipe.sourceName,
+      _id: recipe._id,
+      __v: recipe.__v
     }
+    :
+    {
+      recipeId : recipe.id,
+      steps: recipe.analyzedInstructions,
+      ingredients: recipe.extendedIngredients,
+      imageUrl: recipe.image,
+      title: recipe.title,
+      readyInMinutes: recipe.readyInMinutes,
+      sourceUrl: recipe.sourceUrl,
+      sourceName: recipe.sourceName
+    };
+    let config = {
+      method: 'put',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/accounts/list/save/${this.props.auth0.user.email}`,
+      data: recipeToSave,
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }}
+      let results = await axios(config);
+      console.log(results.data)
   }
 
-  getToken = async () => {
-    console.log('hi');
+
+  getToken = async() => {
     if (this.props.auth0.isAuthenticated) {
       const response = await this.props.auth0.getIdTokenClaims();
       return response.__raw;
@@ -97,14 +66,8 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.checkUserExists();
-    console.log(this.state.user);
-  }
-
-
   render() {
-    console.log(this.state.user.data);
+
     return (
       <>
         <Router>
@@ -112,22 +75,16 @@ class App extends React.Component {
           <Routes>
             <Route
               exact path="/"
-              element={this.props.auth0.isAuthenticated ? <Main /> : <LoginPage />}
+              element={this.props.auth0.isAuthenticated ? <Main saveRecipe={this.saveRecipe} auth={this.props.auth0}/> : <LoginPage />}
             >
             </Route>
-            {this.props.auth0.isAuthenticated &&
-              <>
-                <Route
-                  path="/about"
-                  element={<About />} />
-                <Route
-                  path="/account"
-                  element={<Account
-                    data={this.state.user.data}
-                    doesUserExist={this.state.doesUserExist}
-                  />} />
-              </>
-            }
+            <Route 
+            path="/about"
+            element={this.props.auth0.isAuthenticated ? <About/> : <LoginPage />}/>
+             <Route 
+            path="/account"
+            element={this.props.auth0.isAuthenticated ? <Account saveRecipe={this.saveRecipe}/> : <LoginPage />}/>
+            
           </Routes>
           <Footer />
         </Router>

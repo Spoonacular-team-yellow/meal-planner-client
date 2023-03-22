@@ -1,17 +1,10 @@
 import React from "react";
-// import CloseButton from 'react-bootstrap/CloseButton';
-import { Modal, /*Image,*/ Button } from "react-bootstrap";
+import { Modal, Image, Button } from "react-bootstrap";
 
-class RecipeModal extends React.Component {
-
-  handleRecipeClick = (e) => {
-    e.preventDefault();
-    let addRecipe = {
-      title: e.target.title.value,
-      placehold: e.target.placehold.value
-    };
-    this.props.postRecipe(addRecipe);
-    console.log(addRecipe)
+class RecipeModal extends React.Component{
+  handleSave = () => {
+    this.props.saveRecipe(this.props.selectedRecipe)
+    this.props.toggleRecipeModal()
   }
 
   render() {
@@ -30,14 +23,15 @@ class RecipeModal extends React.Component {
                 {this.props.selectedRecipe.title}
               </Modal.Title>
             }
-             <Button onClick={this.handleSave} variant="primary">Save Recipe</Button>{' '}
+             <Button onClick={this.handleSave} variant="primary">Save</Button>{' '}
+
           </Modal.Header>
           <Modal.Body>
             {this.props.selectedRecipe.title &&
               <Image
-              src={this.props.selectedRecipe.image}
-              alt={this.props.selectedRecipe.title} 
-              fluid={true} 
+                src={this.props.selectedRecipe.image}
+                alt={this.props.selectedRecipe.title} 
+                fluid={true} 
               />
             }
            <h2>Ingredients</h2>
