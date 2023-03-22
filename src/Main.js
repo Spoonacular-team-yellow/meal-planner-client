@@ -27,7 +27,7 @@ class Main extends React.Component {
     let config = {
       method: 'get',
       baseURL: process.env.REACT_APP_SERVER,
-      url: '/recipes/id',
+      url: `/recipes/${id}`,
       headers: {
         "Authorization": `Bearer ${this.state.token}`
       }
@@ -165,6 +165,8 @@ class Main extends React.Component {
             toggleRecipeModal={this.toggleRecipeModal}
             showRecipeModal={this.state.showRecipeModal}
             recipes={this.state.recipe}
+            selectedRecipe={this.state.selectedRecipe}
+            getOneRecipe={this.getOneRecipe}
           />
           <RegisterModal
             showRegisterModal={this.state.showRegisterModal}
