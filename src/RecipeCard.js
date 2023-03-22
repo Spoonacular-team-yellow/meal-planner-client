@@ -8,7 +8,7 @@ class RecipeCard extends React.Component {
         return (
         <Card
             style={{maxWidth: "18rem", cursor: "pointer"}}
-            className="m-1 d-inline-block"
+            className="m-1 d-inline-block card"
             onClick={this.props.toggleRecipeModal}
         >
             <Card.Img

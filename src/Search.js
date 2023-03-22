@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
-
+import './Search.css';
 
 class Search extends React.Component {
  
@@ -8,14 +8,16 @@ class Search extends React.Component {
 
     return (
       <>
-        <Form onSubmit={this.props.getRecipe} onChange={this.props.ingredientHandler}>
+        <Form className='border' onSubmit={this.props.getRecipe} onChange={this.props.ingredientHandler}>
           <Form.Group>
-            <Form.Label>Enter Ingredients</Form.Label>
-            <Form.Control type='text' placeholder='Ex. Eggs' name="ing1"/>
-            <Form.Control type='text' placeholder='Ex. Bacon' name="ing2"/>
-            <Form.Control type='text' placeholder='Ex. Cheese' name="ing3"/>
+            <Form.Label className='text-center d-block m-auto'>Enter Ingredients</Form.Label>
+            <div className="d-flex">
+              <Form.Control className='m-1' type='text' placeholder='Ex. Eggs' name="ing1"/>
+              <Form.Control className='m-1' type='text' placeholder='Ex. Bacon' name="ing2"/>
+              <Form.Control className='m-1' type='text' placeholder='Ex. Cheese' name="ing3"/>
+            </div>
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button id='button' className='mt-2 button' type="submit">
             Search
           </Button>
         </Form>
