@@ -1,13 +1,17 @@
 import React from "react";
 import RecipeCard from "./RecipeCard";
 import RecipeModal from './RecipeModal';
+import './Results.css';
 
 class Results extends React.Component {
   
   render() {
     console.log(this.props.recipes)
+    console.log(this.props)
     return (
       <>
+      <div className="results-div">
+
         { this.props.recipes &&
           <>
           {
@@ -27,6 +31,7 @@ class Results extends React.Component {
           />
           </>
         }
+        </div>
       </>
     );
   }

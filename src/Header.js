@@ -1,11 +1,12 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-import { LinkContainer } from "react-router-bootstrap"
+import { LinkContainer } from "react-router-bootstrap";
+import './Header.css';
 
 class Header extends React.Component {
   render() {
     return (
-      <Navbar collapseOnSelect expand="lg" bg="light">
+      <Navbar collapseOnSelect expand="lg">
         <Navbar.Brand>Meal Prep</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav">
