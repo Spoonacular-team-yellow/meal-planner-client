@@ -25,7 +25,8 @@ class RecipeModal extends React.Component{
                 {this.props.selectedRecipe.title}
               </Modal.Title>
             }
-             <Button onClick={this.handleSave} variant="primary">Save Recipe</Button>{' '}
+             <Button onClick={this.handleSave} variant="primary">Save</Button>{' '}
+
           </Modal.Header>
           <Modal.Body>
             {this.props.selectedRecipe.title &&
