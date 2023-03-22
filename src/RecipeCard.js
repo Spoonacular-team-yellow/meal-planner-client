@@ -3,25 +3,22 @@ import Card from "react-bootstrap/Card";
 
 class RecipeCard extends React.Component {
 
-
     render(){
 
         return (
-
-        <Card style={{ width: "18rem" }} className="m-1 d-inline-block">
+        <Card
+            style={{maxWidth: "18rem", cursor: "pointer"}}
+            className="m-1 d-inline-block"
+            onClick={this.props.toggleRecipeModal}
+        >
             <Card.Img
-              // variant="top"
-              // src={this.props.src}
-              // className="h-50"
-              // onClick={this.handleFavorites}
+              variant="top"
+              src={this.props.recipe.image}
             />
             <Card.Body>
               <Card.Title>
-                  {/* {this.props.title} */}
-                  </Card.Title>
-              <Card.Text>
-                  {/* {this.state.desc} */}
-                  </Card.Text>
+                  {this.props.recipe.title}
+                </Card.Title>
             </Card.Body>
         </Card>
         );

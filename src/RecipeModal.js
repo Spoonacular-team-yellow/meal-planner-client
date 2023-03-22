@@ -1,45 +1,17 @@
 import React from "react";
 // import CloseButton from 'react-bootstrap/CloseButton';
-import { Modal, /*Image,*/ Button } from "react-bootstrap/Modal";
+import { Modal, /*Image,*/ } from "react-bootstrap";
 
 class RecipeModal extends React.Component{
-
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      addBook: false,
-      showModal: false,
-    };
-  }
-
-
-  handleShow = (e) => {
-    e.preventDefault();
-    this.setState({
-      addBook: true,
-      showModal: true,
-    });
-  };
-
-  handleHide = () => {
-    this.setState({
-      showModal: false,
-    });
-  };
-
-
-
   render(){
-
     return (
       <>
         <Modal
         //   size="lg"
         //   aria-labelledby="contained-modal-title-vcenter"
         //   centered
-        show={this.state.showModal} 
-        onHide={this.handleHide}
+        show={this.props.showRecipeModal} 
+        onHide={this.props.toggleRecipeModal}
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
@@ -53,9 +25,6 @@ class RecipeModal extends React.Component{
             </p>
           </Modal.Body>
           <Modal.Footer>
-            <Button 
-            onHide={this.handleHide}
-            >Close</Button>
           </Modal.Footer>
         </Modal>
       </>
