@@ -9,14 +9,12 @@ import LoginPage from './LoginPage';
 import Account from './Account';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { withAuth0 } from '@auth0/auth0-react';
-import Account from './Account';
-import axios from 'axios';
 
 
 import './App.css';
 
 
-const SERVER = process.env.REACT_APP_SERVER;
+// const SERVER = process.env.REACT_APP_SERVER;
 class App extends React.Component {
   saveRecipe = async(recipe)=> {
     let token = await this.getToken();
