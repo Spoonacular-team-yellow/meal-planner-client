@@ -1,8 +1,5 @@
 import React from "react";
-// import Button from "react-bootstrap/Button";
-// import InputGroup from "react-bootstrap/InputGroup";
-// import Form from "react-bootstrap/Form";
-// import { Badge } from "react-bootstrap";
+import Container from 'react-bootstrap/Container';
 import Search from "./Search";
 import Results from "./Results";
 import axios from "axios";
@@ -136,20 +133,22 @@ class Main extends React.Component {
   render() {
     return (
       <>
-        <Search
-          // ingredientHandler={this.ingredientHandler}
-          getRecipe={this.getRecipe}
-        />
-        <Results 
-          toggleRecipeModal={this.toggleRecipeModal}
-          showRecipeModal={this.state.showRecipeModal}
-          recipes={this.state.recipe}
-        />
-        <RegisterModal
-          showRegisterModal={this.state.showRegisterModal}
-          createUser={this.createUser}
-          toggleRegisterModal={this.toggleRegisterModal}
-        />
+        <Container>
+          <Search
+            // ingredientHandler={this.ingredientHandler}
+            getRecipe={this.getRecipe}
+          />
+          <Results 
+            toggleRecipeModal={this.toggleRecipeModal}
+            showRecipeModal={this.state.showRecipeModal}
+            recipes={this.state.recipe}
+          />
+          <RegisterModal
+            showRegisterModal={this.state.showRegisterModal}
+            createUser={this.createUser}
+            toggleRegisterModal={this.toggleRegisterModal}
+          />
+        </Container>
       </>
     );
   }

@@ -1,0 +1,9 @@
+nav {
+    /* background-color: #413dab; */
+    border-bottom: 1px solid black;
+    margin-bottom: 3rem;
+}
+
+.navbar-brand {
+    margin-left: 2.5rem;
+}
