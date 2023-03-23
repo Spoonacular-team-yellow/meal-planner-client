@@ -1,7 +1,14 @@
 import React from "react";
-import { Card, Button, Badge } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
+import axios from "axios";
+import { withAuth0 } from '@auth0/auth0-react';
+
 
 class AccountRecipeCard extends React.Component {
+
+
+
+
     handleCustom = () => {
         this.props.setSelectedUserRecipe(this.props.recipe);
         this.props.toggleCustomRecipeModal();
@@ -14,12 +21,37 @@ class AccountRecipeCard extends React.Component {
             this.props.removeRecipe(this.props.recipe.recipeId);
         }
     }
+
+    handleClick = () => { 
+        this.props.setSelectedUserRecipe(this.props.recipe)
+        this.getOneRecipe(this.props.recipe.recipeId);
+        this.props.toggleAccountRecipeModal();
+
+    }
+
+    getOneRecipe = async (id) => {
+        let config = {
+          method: 'get',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: `/recipes/${id}`,
+          headers: {
+            "Authorization": `Bearer ${this.props.token}`
+          }
+        }
+        let results = await axios (config);
+        this.setState({
+          selectedRecipe: results.data
+        })
+      } 
+
+
     render(){
-        console.log(this.props.recipe.wasModified);
+
         return (
         <Card
             style={{maxWidth: "18rem"}}
             className="m-1 d-inline-block"
+            onClick={this.handleClick}
         >
             <Card.Img
               variant="top"
@@ -43,4 +75,4 @@ class AccountRecipeCard extends React.Component {
     };
 };
 
-export default AccountRecipeCard;
+export default withAuth0(AccountRecipeCard);

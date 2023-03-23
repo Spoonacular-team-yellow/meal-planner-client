@@ -8,9 +8,9 @@ class Search extends React.Component {
 
     return (
       <>
-        <Form className='border' onSubmit={this.props.getRecipe} onChange={this.props.ingredientHandler}>
+        <Form className='border bg-white' onSubmit={this.props.getRecipe} onChange={this.props.ingredientHandler}>
           <Form.Group>
-            <Form.Label className='text-center d-block m-auto'>Enter Ingredients</Form.Label>
+            <Form.Label className='srch'>Enter Ingredients</Form.Label>
             <div className="d-flex">
               <Form.Control className='m-1' type='text' placeholder='Ex. Eggs' name="ing1"/>
               <Form.Control className='m-1' type='text' placeholder='Ex. Bacon' name="ing2"/>
