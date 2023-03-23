@@ -50,7 +50,6 @@ class Account extends React.Component {
   }
 
   removeRecipe = async (id) => {
-    console.log(id);
     let email = this.props.auth0.user.email;
     let config = {
       method: 'put',
@@ -75,8 +74,57 @@ class Account extends React.Component {
     })
   };
 
+  removeCustomRecipe = async (id) => {
+    let email = this.props.auth0.user.email;
+    let config = {
+      method: 'put',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/accounts/list/remove/${email}`,
+      data: {"_id": id},
+      headers: {
+        "Authorization": `Bearer ${this.state.token}`
+      }
+    }
+    let response = await axios(config);
+
+    let config2 = {
+      method: 'delete',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/customrecipes/${id}`,
+      headers: {
+        "Authorization": `Bearer ${this.state.token}`
+      }
+    }
+    await axios(config);
+    this.removeCustomRecipeFromUser(response.data);
+  }
+
+  removeCustomRecipeFromUser = (customRecipe) => {
+    let index = this.state.user.recipes.findIndex(recipe => recipe._id === customRecipe._id);
+    console.log(customRecipe._id);
+    console.log(this.state.user.recipes);
+    let updatedUser = {...this.state.user};
+    if (index >= 0) {
+      console.log(this.state.user.recipes);
+      let updatedRecipes = this.state.user.recipes.filter((recipe) => {
+        if (Object.hasOwn(recipe, '_id')) {
+          console.log(recipe._id + ' ' + customRecipe._id);
+          let ternary = recipe._id === customRecipe._id ? false : recipe;
+          console.log(ternary);
+          return ternary;
+        } else {
+          return recipe;
+        }
+      });
+      console.log(updatedRecipes);
+      updatedUser.recipes = updatedRecipes;
+      this.setState({
+        user: updatedUser
+      })
+    }
+  }
+
   insertCustomRecipe = (customRecipe) => {
-    console.log(customRecipe, 'hey');
     let index = this.state.user.recipes.findIndex(recipe => recipe._id === customRecipe._id);
     let updatedUser = {...this.state.user};
     if (index > 0) {
@@ -90,7 +138,6 @@ class Account extends React.Component {
         user: updatedUser
       })
     }
-    console.log(updatedUser, 'user');
   }
 
   componentDidMount() {
@@ -112,6 +159,7 @@ class Account extends React.Component {
         setUserRecipe={this.setUserRecipe}
         selectedUserRecipe={this.state.selectedUserRecipe}
         removeRecipe={this.removeRecipe}
+        removeCustomRecipe={this.removeCustomRecipe}
         saveRecipe={this.props.saveRecipe}
         insertCustomRecipe={this.insertCustomRecipe}
         token={this.state.token}

@@ -73,6 +73,7 @@ class Results extends React.Component {
                     toggleCustomRecipeModal={this.props.toggleCustomRecipeModal}
                     setSelectedUserRecipe={this.setSelectedUserRecipe}
                     removeRecipe={this.props.removeRecipe}
+                    removeCustomRecipe={this.props.removeCustomRecipe}
                   />
                   : <RecipeCard 
                       toggleRecipeModal={this.props.toggleRecipeModal}

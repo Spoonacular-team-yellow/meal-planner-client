@@ -8,7 +8,11 @@ class AccountRecipeCard extends React.Component {
     }
 
     handleRemove = () => {
-        this.props.removeRecipe(this.props.recipe.recipeId);
+        if (Object.hasOwn(this.props.recipe, '_id')) {
+            this.props.removeCustomRecipe(this.props.recipe._id);
+        } else {
+            this.props.removeRecipe(this.props.recipe.recipeId);
+        }
     }
     render(){
         return (
