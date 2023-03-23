@@ -19,8 +19,10 @@ clickMe = (e) => {
         ingredients: recipe_ingredients, 
         imageUrl: e.target.imageUrl.value,
         title: e.target.title.value,
+        readyInMinutes: this.props.selectedUserRecipe.readyInMinutes,
         sourceUrl: this.props.selectedUserRecipe.sourceUrl,
         sourceName: this.props.selectedUserRecipe.sourceName,
+        wasModified: this.props.selectedUserRecipe.wasModified || false
     };
     if (Object.hasOwn(this.props.selectedUserRecipe, '_id')) {
         newCustomRecipe._id = this.props.selectedUserRecipe._id;

@@ -20,11 +20,12 @@ class App extends React.Component {
     let token = await this.getToken();
     let recipeToSave = Object.hasOwn(recipe, '_id') ?
     {
-      recipeId : recipe.id,
+      recipeId : recipe.recipeId,
       steps: recipe.steps,
       ingredients: recipe.ingredients,
       imageUrl: recipe.imageUrl,
       title: recipe.title,
+      readyInMinutes: recipe.readyInMinutes,
       sourceUrl: recipe.sourceUrl,
       sourceName: recipe.sourceName,
       _id: recipe._id,

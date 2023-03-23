@@ -21,10 +21,13 @@ class Results extends React.Component {
   }
 
   handleCustomRecipe = async (updatedRecipe) => {
-    console.log(updatedRecipe);
     let result = {};
-    if (Object.hasOwn(updatedRecipe,'_id')) {
-      let config = {
+    let config ={};
+    console.log(updatedRecipe);
+    console.log(updatedRecipe.wasModified);
+    if (Object.hasOwn(updatedRecipe, 'wasModified') && updatedRecipe.wasModified === true) {
+      console.log('there');
+      config = {
         method: 'put',
         baseURL: process.env.REACT_APP_SERVER,
         url: `/customrecipes/${updatedRecipe._id}`,
@@ -35,7 +38,8 @@ class Results extends React.Component {
       }
       result = await axios(config);
     } else {
-      let config = {
+      updatedRecipe.wasModified = true;
+      config = {
           method: 'post',
           baseURL: process.env.REACT_APP_SERVER,
           url: `/customrecipes`,
@@ -57,7 +61,6 @@ class Results extends React.Component {
   }
   
   render() {
-    console.log(this.props.recipes);
     return (
       <>
       <div className="results-div">

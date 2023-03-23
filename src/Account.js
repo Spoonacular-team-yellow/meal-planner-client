@@ -124,7 +124,7 @@ class Account extends React.Component {
     }
   }
 
-  insertCustomRecipe = (customRecipe) => {
+  insertCustomRecipe = (customRecipe, modified) => {
     let index = this.state.user.recipes.findIndex(recipe => recipe._id === customRecipe._id);
     let updatedUser = {...this.state.user};
     if (index > 0) {
@@ -146,7 +146,6 @@ class Account extends React.Component {
 
   render() {
     let test = {...this.state.user};
-    console.log(test);
     return (
       <>
       <h2>{this.state.user.username}</h2>
