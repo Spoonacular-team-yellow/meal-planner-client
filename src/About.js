@@ -9,8 +9,8 @@ class Profile extends Component {
       <Container>
 
         <div className="about-content">
-          <h1 className="d-flex justify-content-center">About us</h1>
-          <section>
+          <h1 className="abtus">About us</h1>
+          <section className="textcol">
               <div className="d-flex align-items-center">
                 <img className="mx-2" src='../img/Phillip.jpeg' alt="phillip chaplin"/>
                 <div className="d-flex flex-column px-5">
@@ -20,7 +20,7 @@ class Profile extends Component {
               </div>
           </section>
 
-          <section>
+          <section className="textcol">
               <div className="d-flex align-items-center">
                 <img className="mx-2" src='../img/DanieImg.jpeg' alt="daniel yoon"/>
                 <div className="d-flex flex-column px-5">
@@ -29,7 +29,7 @@ class Profile extends Component {
                 </div>
               </div>
           </section>
-          <section>
+          <section className="textcol">
               <div className="d-flex align-items-center">
                 <img className="mx-2" src='../img/Joelmg.jpeg' alt="joel myrtil"/>
                 <div className="d-flex flex-column px-5">
@@ -38,7 +38,7 @@ class Profile extends Component {
                 </div>
               </div>
           </section>
-          <section>
+          <section className="textcol">
               <div className="d-flex align-items-center">
                 <img className="mx-2" src='../img/ahmedImg.jpeg' alt="ahmed mohamed"/>
                 <div className="d-flex flex-column px-5">

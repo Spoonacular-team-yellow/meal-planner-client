@@ -31,6 +31,7 @@ class App extends React.Component {
       sourceName: recipe.sourceName,
       _id: recipe._id,
       __v: recipe.__v
+      
     }
     :
     {
@@ -68,12 +69,16 @@ class App extends React.Component {
     }
   }
 
+
   render() {
 
     return (
       <>
       <Router>
+          {this.props.auth0.isAuthenticated 
+          &&
           <Header />
+          }
           <Routes>
           <Route 
               exact path="/"
