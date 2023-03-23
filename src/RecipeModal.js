@@ -31,9 +31,9 @@ class RecipeModal extends React.Component{
           <Modal.Body>
             {this.props.selectedRecipe.title &&
               <Image
-              src={this.props.selectedRecipe.image}
-              alt={this.props.selectedRecipe.title} 
-              fluid={true} 
+                src={this.props.selectedRecipe.image}
+                alt={this.props.selectedRecipe.title} 
+                fluid={true} 
               />
             }
            <h2>Ingredients</h2>
