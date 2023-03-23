@@ -32,14 +32,15 @@ class RecipeModal extends React.Component{
                 {recipe.title}
               </Modal.Title>
             }
-            { !this.props.accountCardModal &&
-              <>
-                <Button onClick={this.handleSave} variant="primary">Save</Button>{' '}
-              </>
-            }
+
 
           </Modal.Header>
           <Modal.Body>
+          { !this.props.accountCardModal &&
+              <>
+                <Button className="my-2" onClick={this.handleSave} variant="primary">Save Recipe</Button>{' '}
+              </>
+            }
             { this.props.accountCardModal && recipe.title ?
               <>
               <Image

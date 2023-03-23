@@ -8,7 +8,7 @@ class Search extends React.Component {
 
     return (
       <>
-        <Form className='border' onSubmit={this.props.getRecipe} onChange={this.props.ingredientHandler}>
+        <Form className='border bg-white' onSubmit={this.props.getRecipe} onChange={this.props.ingredientHandler}>
           <Form.Group>
             <Form.Label className='srch'>Enter Ingredients</Form.Label>
             <div className="d-flex">

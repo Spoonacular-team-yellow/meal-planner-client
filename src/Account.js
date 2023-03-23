@@ -149,8 +149,7 @@ class Account extends React.Component {
 
     return (
       <>
-      <h2 className="username">{this.state.user.username}</h2>
-      <h2 className="srecipe">Saved Recipes</h2>
+      <h2 className="srecipe">Your Saved Recipes</h2>
       <Results 
         fromAccount={true}
         recipes={this.state.user.recipes}
