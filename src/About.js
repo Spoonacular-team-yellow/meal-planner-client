@@ -1,6 +1,5 @@
 import { Component } from "react";
 import Container from 'react-bootstrap/Container';
-// import Image from 'react-bootstrap/Image'
 import "./About.css"
 
 class Profile extends Component {
