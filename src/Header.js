@@ -21,6 +21,11 @@ class Header extends React.Component {
               <Nav.Link className="nav-link">About Us</Nav.Link>
               </LinkContainer>
             </Nav.Item>
+            <Nav.Item>
+              <LinkContainer to="/account">
+              <Nav.Link className="nav-link">Account</Nav.Link>
+              </LinkContainer>
+            </Nav.Item>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
