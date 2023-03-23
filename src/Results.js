@@ -10,8 +10,7 @@ class Results extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedUserRecipe: {},
-      accountCardModal: false
+      selectedUserRecipe: {}
     };
   }
 
@@ -24,7 +23,7 @@ class Results extends React.Component {
   handleCustomRecipe = async (updatedRecipe) => {
     let result = {};
     let config ={};
-    console.log(updatedRecipe.wasModified, 'moo');
+
     if (Object.hasOwn(updatedRecipe, 'wasModified') && updatedRecipe.wasModified === true) {
       console.log('there');
       config = {
@@ -54,13 +53,6 @@ class Results extends React.Component {
     this.props.insertCustomRecipe(result.data);
   }
 
-  toggleAccountRecipeModal = () => {
-      this.setState({
-        accountCardModal: !this.state.accountCardModal
-      })
-      console.log(this.state.accountCardModal)
-    };
-
   componentDidMount() {
     this.setState({
       selectedUserRecipe: {}
@@ -71,24 +63,18 @@ class Results extends React.Component {
     return (
       <>
       <div className="results-div">
-
         { this.props.recipes &&
           <>
-
           {
             this.props.recipes.map((recipe, idx)=> {
               return this.props.isUserList ? 
                   <AccountRecipeCard 
-                    toggleRecipeModal={this.toggleRecipeModal}
                     key={idx}
                     recipe={recipe}
                     toggleCustomRecipeModal={this.props.toggleCustomRecipeModal}
                     setSelectedUserRecipe={this.setSelectedUserRecipe}
                     removeRecipe={this.props.removeRecipe}
                     removeCustomRecipe={this.props.removeCustomRecipe}
-                    token={this.props.token}
-                    toggleAccountRecipeModal={this.toggleAccountRecipeModal}
-
                   />
                   : <RecipeCard 
                       toggleRecipeModal={this.props.toggleRecipeModal}
@@ -98,7 +84,7 @@ class Results extends React.Component {
                     />
             })
           }
-          {this.props.isUserList && !this.state.accountCardModal ? 
+          {this.props.isUserList ?
           <CustomRecipeModal 
             showCustomRecipeModal={this.props.showCustomRecipeModal}
             toggleCustomRecipeModal={this.props.toggleCustomRecipeModal}
@@ -106,17 +92,13 @@ class Results extends React.Component {
             handleCustomRecipe={this.handleCustomRecipe}
           />
           :
-          <RecipeModal 
-            selectedUserRecipe={this.state.selectedUserRecipe}
-            accountCardModal={this.state.accountCardModal}
+           <RecipeModal 
             showRecipeModal={this.props.showRecipeModal}
             toggleRecipeModal={this.props.toggleRecipeModal}
-            toggleAccountRecipeModal={this.toggleAccountRecipeModal}
             selectedRecipe={this.props.selectedRecipe}
             saveRecipe={this.props.saveRecipe}
           />
           }
-
           </>
         }
         </div>

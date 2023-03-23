@@ -4,8 +4,8 @@ nav {
     margin-bottom: 3rem;
     background-color: #455d7a;
     color: white !important;
+    text-align: center;
 }
-
 
 .navbar-brand {
     margin-left: 2.5rem;
@@ -13,5 +13,4 @@ nav {
 }
 .nav-link {
     color: white !important;
-
 }

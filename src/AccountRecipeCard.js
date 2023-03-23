@@ -22,7 +22,6 @@ class AccountRecipeCard extends React.Component {
         this.props.setSelectedUserRecipe(this.props.recipe)
         this.getOneRecipe(this.props.recipe.recipeId);
         this.props.toggleAccountRecipeModal();
-
     }
 
     getOneRecipe = async (id) => {
@@ -61,11 +60,11 @@ class AccountRecipeCard extends React.Component {
                 <br />
                 {this.props.recipe.title}
                 </Card.Title>
+                <div className="mt-4">
+                    <Button onClick={this.handleCustom}>Customize</Button>
+                    <Button onClick={this.handleRemove}>Remove</Button>
+                </div>
             </Card.Body>
-            <Card.Footer>
-                <Button onClick={this.handleCustom}>Customize</Button>
-                <Button onClick={this.handleRemove}>Remove</Button>
-            </Card.Footer>
         </Card>
         );
     };
