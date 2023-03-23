@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, Form } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 
 class AccountRecipeCard extends React.Component {
     handleCustom = () => {
@@ -8,7 +8,7 @@ class AccountRecipeCard extends React.Component {
     }
 
     handleRemove = () => {
-        console.log('remove');
+        this.props.removeRecipe(this.props.recipe.recipeId);
     }
     render(){
 
@@ -19,7 +19,7 @@ class AccountRecipeCard extends React.Component {
         >
             <Card.Img
               variant="top"
-              src={this.props.recipe.image}
+              src={this.props.recipe.imageUrl}
             />
             <Card.Body>
               <Card.Title>

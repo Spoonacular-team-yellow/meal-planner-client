@@ -20,6 +20,7 @@ class Results extends React.Component {
   }
   
   render() {
+    console.log(this.props.recipes);
     return (
       <>
       <div className="results-div">
@@ -30,14 +31,15 @@ class Results extends React.Component {
             this.props.recipes.map((recipe, idx)=> {
               return this.props.isUserList ? 
                   <AccountRecipeCard 
-                    key={recipe.id}
+                    key={idx}
                     recipe={recipe}
                     toggleCustomRecipeModal={this.props.toggleCustomRecipeModal}
                     setSelectedUserRecipe={this.setSelectedUserRecipe}
+                    removeRecipe={this.props.removeRecipe}
                   />
                   : <RecipeCard 
                       toggleRecipeModal={this.props.toggleRecipeModal}
-                      key={recipe.id} 
+                      key={idx} 
                       recipe={recipe}
                       getOneRecipe={this.props.getOneRecipe}
                     />

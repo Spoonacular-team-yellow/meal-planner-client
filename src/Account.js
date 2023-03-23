@@ -49,23 +49,50 @@ class Account extends React.Component {
     }
   }
 
+  removeRecipe = async (id) => {
+    console.log(id);
+    let email = this.props.auth0.user.email;
+    let config = {
+      method: 'put',
+      baseURL: process.env.REACT_APP_SERVER,
+      url: `/accounts/list/remove/${email}`,
+      data: {"id": id},
+      headers: {
+        "Authorization": `Bearer ${this.state.token}`
+      }
+    }
+    await axios(config);
+    let updatedRecipe = this.state.user.recipes.filter(recipe => recipe.recipeId !== id);
+    let updatedUser = {
+      username: this.state.user.username,
+      email: this.state.user.email,
+      _id: this.state.user._id,
+      __v: this.state.user.__v,
+      recipes: updatedRecipe
+    }
+    this.setState({
+      user: updatedUser
+    })
+  };
+
   componentDidMount() {
     this.getToken();
   }
 
   render() {
-    let test_recipes = data;
+    console.log(this.state.user);
     return (
       <>
       <h2>{this.state.user.username}</h2>
       <h2>Saved Recipes</h2>
       <Results 
-        recipes={test_recipes}
+        recipes={this.state.user.recipes}
         isUserList={true}
         toggleCustomRecipeModal={this.toggleCustomRecipeModal}
         showCustomRecipeModal={this.state.showCustomRecipeModal}
         setUserRecipe={this.setUserRecipe}
         selectedUserRecipe={this.state.selectedUserRecipe}
+        removeRecipe={this.removeRecipe}
       />
       </>
     );

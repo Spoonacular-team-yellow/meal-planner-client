@@ -39,7 +39,6 @@ class Main extends React.Component {
   } 
 
   saveRecipe = async(recipe)=> {
-
     let recipeToSave = {
       recipeId : recipe.id,
       steps: recipe.analyzedInstructions,
@@ -55,9 +54,7 @@ class Main extends React.Component {
       method: 'put',
       baseURL: process.env.REACT_APP_SERVER,
       url: `/accounts/list/save/${this.props.auth0.user.email}`,
-      data: {
-        ingredients: recipeToSave
-      },
+      data: recipeToSave,
       headers: {
         "Authorization": `Bearer ${this.state.token}`
       }}
