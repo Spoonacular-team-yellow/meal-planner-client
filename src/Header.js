@@ -7,7 +7,7 @@ class Header extends React.Component {
   render() {
     return (
       <Navbar collapseOnSelect expand="lg">
-        <Navbar.Brand>Meal Prep</Navbar.Brand>
+        <Navbar.Brand>Grub Guide</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

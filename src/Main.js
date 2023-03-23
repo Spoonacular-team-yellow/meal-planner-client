@@ -104,9 +104,7 @@ class Main extends React.Component {
       }
     };
     let createdUser = await axios(config);
-    // this.setState({
-    //   user: createdUser
-    // });
+    console.log('user created: ', createdUser)
   }
 
   checkUserExists= async() => {
@@ -168,7 +166,6 @@ class Main extends React.Component {
       <>
         <Container>
           <Search
-            // ingredientHandler={this.ingredientHandler}
             getRecipe={this.getRecipe}
           />
           <Results 
