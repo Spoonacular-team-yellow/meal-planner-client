@@ -1,14 +1,10 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Badge} from "react-bootstrap";
 import axios from "axios";
 import { withAuth0 } from '@auth0/auth0-react';
 
 
 class AccountRecipeCard extends React.Component {
-
-
-
-
     handleCustom = () => {
         this.props.setSelectedUserRecipe(this.props.recipe);
         this.props.toggleCustomRecipeModal();
@@ -16,7 +12,7 @@ class AccountRecipeCard extends React.Component {
 
     handleRemove = () => {
         if (Object.hasOwn(this.props.recipe, '_id')) {
-            this.props.removeCustomRecipe(this.props.recipe._id);
+            this.props.removeCustomRecipe(this.props.recipe);
         } else {
             this.props.removeRecipe(this.props.recipe.recipeId);
         }
@@ -59,11 +55,15 @@ class AccountRecipeCard extends React.Component {
             />
             <Card.Body>
               <Card.Title>
-                  {this.props.recipe.title}
+                {Object.hasOwn(this.props.recipe, 'wasModified') &&
+                    <Badge pill bg="success">Custom Recipe</Badge>
+                }
+                <br />
+                {this.props.recipe.title}
                 </Card.Title>
             </Card.Body>
             <Card.Footer>
-                <Button onClick={this.handleCustom}>Customize Recipe</Button>
+                <Button onClick={this.handleCustom}>Customize</Button>
                 <Button onClick={this.handleRemove}>Remove</Button>
             </Card.Footer>
         </Card>
