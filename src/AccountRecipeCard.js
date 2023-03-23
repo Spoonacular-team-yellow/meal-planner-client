@@ -51,10 +51,10 @@ class AccountRecipeCard extends React.Component {
         <Card
             style={{maxWidth: "18rem"}}
             className="m-1 d-inline-block"
-            onClick={this.handleClick}
-        >
+            >
             <Card.Img
               variant="top"
+              onClick={this.handleClick}
               src={this.props.recipe.imageUrl}
             />
             <Card.Body>
