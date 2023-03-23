@@ -1,9 +1,8 @@
 import React from "react";
-import { Card } from "react-bootstrap";
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import Results from './Results';
-import data from './test.json';
+
 
 class Account extends React.Component {
   constructor(props) {
@@ -95,7 +94,7 @@ class Account extends React.Component {
         "Authorization": `Bearer ${this.state.token}`
       }
     }
-    await axios(config);
+    await axios(config2);
     this.removeCustomRecipeFromUser(response.data);
   }
 
@@ -145,7 +144,7 @@ class Account extends React.Component {
   }
 
   render() {
-    let test = {...this.state.user};
+
     return (
       <>
       <h2>{this.state.user.username}</h2>

@@ -1,7 +1,5 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-// import { Button } from 'react-bootstrap';
-//import { Route, Router, Routes } from 'react-router';
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
@@ -11,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { withAuth0 } from '@auth0/auth0-react';
 import Account from './Account';
 import axios from 'axios';
-// import Results from './Results';
+
 
 import './App.css';
 

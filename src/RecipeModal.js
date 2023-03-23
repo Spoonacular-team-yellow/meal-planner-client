@@ -1,12 +1,10 @@
 import React from "react";
-// import CloseButton from 'react-bootstrap/CloseButton';
 import { Modal, Image, Button } from "react-bootstrap";
 
 class RecipeModal extends React.Component{
   handleSave = () => {
     this.props.saveRecipe(this.props.selectedRecipe)
     this.props.toggleRecipeModal()
-    // console.log(this.props, 'this.props')
   }
   render(){
     return (
