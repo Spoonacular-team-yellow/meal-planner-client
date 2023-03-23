@@ -150,6 +150,7 @@ class Account extends React.Component {
       <h2>{this.state.user.username}</h2>
       <h2>Saved Recipes</h2>
       <Results 
+        fromAccount={true}
         recipes={this.state.user.recipes}
         isUserList={true}
         toggleCustomRecipeModal={this.toggleCustomRecipeModal}

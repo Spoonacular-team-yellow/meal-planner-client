@@ -6,51 +6,92 @@ class RecipeModal extends React.Component{
     this.props.saveRecipe(this.props.selectedRecipe)
     this.props.toggleRecipeModal()
   }
+
+  handleCloseAccountModal = ()=> {
+    if (this.props.accountCardModal){
+      this.props.toggleAccountRecipeModal()
+    }
+    else {
+      this.props.toggleRecipeModal()
+    }
+  }
   render(){
+    let recipe = this.props.accountCardModal ? this.props.selectedUserRecipe : this.props.selectedRecipe
+
     return (
       <>
         <Modal
-        //   size="lg"
-        //   aria-labelledby="contained-modal-title-vcenter"
-        //   centered
-        show={this.props.showRecipeModal} 
-        onHide={this.props.toggleRecipeModal}
-        // recipes={this.props.recipe}
+
+        show={this.props.showRecipeModal || this.props.accountCardModal} 
+        onHide={this.handleCloseAccountModal}
+
         >
           <Modal.Header closeButton>
-            {this.props.selectedRecipe.title &&
+            {recipe.title &&
               <Modal.Title id="contained-modal-title-vcenter">
-                {this.props.selectedRecipe.title}
+                {recipe.title}
               </Modal.Title>
             }
-             <Button onClick={this.handleSave} variant="primary">Save</Button>{' '}
+            { !this.props.accountCardModal &&
+              <>
+                <Button onClick={this.handleSave} variant="primary">Save</Button>{' '}
+              </>
+            }
 
           </Modal.Header>
           <Modal.Body>
-            {this.props.selectedRecipe.title &&
+            { this.props.accountCardModal && recipe.title ?
+              <>
               <Image
-                src={this.props.selectedRecipe.image}
-                alt={this.props.selectedRecipe.title} 
+                src={recipe.imageUrl}
+                alt={recipe.title} 
+                fluid={true} 
+              />
+              </>
+              :
+              <Image
+                src={recipe.image}
+                alt={recipe.title} 
                 fluid={true} 
               />
             }
            <h2>Ingredients</h2>
            <ul>
-            { this.props.selectedRecipe.extendedIngredients &&
+            { !this.props.accountCardModal && recipe.extendedIngredients &&
               <>
-                {this.props.selectedRecipe.extendedIngredients.map((ingredient, idx) =>{
+                {recipe.extendedIngredients.map((ingredient, idx) =>{
                   return(
                     <li key={idx}>{ingredient.original}</li>
                   )
                 })}
               </>
             }
+
+            {
+              this.props.accountCardModal && recipe.ingredients &&
+              <>
+              {
+                recipe.ingredients.map((ingredient, idx)=>{
+                  return <li key={idx}>{ingredient.original}</li>
+                })
+              }
+              </>
+            }
             </ul>
             <h2>Instructions</h2>
             <ol>
-              { this.props.selectedRecipe.analyzedInstructions &&
+              { !this.props.accountCardModal && recipe.analyzedInstructions &&
                 <>
-                {this.props.selectedRecipe.analyzedInstructions[0].steps.map((step, idx) => {
+                {recipe.analyzedInstructions[0].steps.map((step, idx) => {
+                  return (
+                    <li key={idx}>{step.step}</li>
+                  )
+                })}
+                </>
+              }
+              { this.props.accountCardModal && recipe.steps &&
+                <>
+                {recipe.steps[0].steps.map((step, idx) => {
                   return (
                     <li key={idx}>{step.step}</li>
                   )

@@ -14,6 +14,9 @@ import axios from 'axios';
 import './App.css';
 
 class App extends React.Component {
+
+
+
   saveRecipe = async(recipe)=> {
     let token = await this.getToken();
     let recipeToSave = Object.hasOwn(recipe, '_id') ?
@@ -56,6 +59,9 @@ class App extends React.Component {
   getToken = async() => {
     if (this.props.auth0.isAuthenticated) {
       const response = await this.props.auth0.getIdTokenClaims();
+      this.setState({
+        token: response.__raw
+      })
       return response.__raw;
     } else {
       return null;
