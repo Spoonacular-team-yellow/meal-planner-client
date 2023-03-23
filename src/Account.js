@@ -11,7 +11,7 @@ class Account extends React.Component {
       user: {},
       token: '',
       showCustomRecipeModal: false
-    }
+    };
   }
 
   toggleCustomRecipeModal = () => {
@@ -19,6 +19,7 @@ class Account extends React.Component {
       showCustomRecipeModal: !this.state.showCustomRecipeModal
     });
   }
+  
 
   getUser = async () => {
     let email = this.props.auth0.user.email;
