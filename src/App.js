@@ -18,7 +18,20 @@ import './App.css';
 class App extends React.Component {
   saveRecipe = async(recipe)=> {
     let token = await this.getToken();
-    let recipeToSave = {
+    let recipeToSave = Object.hasOwn(recipe, '_id') ?
+    {
+      recipeId : recipe.id,
+      steps: recipe.steps,
+      ingredients: recipe.ingredients,
+      imageUrl: recipe.imageUrl,
+      title: recipe.title,
+      sourceUrl: recipe.sourceUrl,
+      sourceName: recipe.sourceName,
+      _id: recipe._id,
+      __v: recipe.__v
+    }
+    :
+    {
       recipeId : recipe.id,
       steps: recipe.analyzedInstructions,
       ingredients: recipe.extendedIngredients,
@@ -27,8 +40,7 @@ class App extends React.Component {
       readyInMinutes: recipe.readyInMinutes,
       sourceUrl: recipe.sourceUrl,
       sourceName: recipe.sourceName
-    }
-
+    };
     let config = {
       method: 'put',
       baseURL: process.env.REACT_APP_SERVER,

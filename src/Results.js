@@ -21,6 +21,7 @@ class Results extends React.Component {
   }
 
   handleCustomRecipe = async (updatedRecipe) => {
+    console.log(updatedRecipe);
     let result = {};
     if (Object.hasOwn(updatedRecipe,'_id')) {
       let config = {
@@ -56,6 +57,7 @@ class Results extends React.Component {
   }
   
   render() {
+    console.log(this.props.recipes);
     return (
       <>
       <div className="results-div">
