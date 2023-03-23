@@ -2,6 +2,7 @@ import React from "react";
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import Results from './Results';
+import './Account.css'
 
 
 class Account extends React.Component {
@@ -11,7 +12,7 @@ class Account extends React.Component {
       user: {},
       token: '',
       showCustomRecipeModal: false
-    }
+    };
   }
 
   toggleCustomRecipeModal = () => {
@@ -19,6 +20,7 @@ class Account extends React.Component {
       showCustomRecipeModal: !this.state.showCustomRecipeModal
     });
   }
+  
 
   getUser = async () => {
     let email = this.props.auth0.user.email;
@@ -124,9 +126,9 @@ class Account extends React.Component {
     console.log(this.state.user);
     return (
       <>
-      <h2>{this.state.user.username}</h2>
-      <h2>Saved Recipes</h2>
+      <h2 className="srecipe">Your Saved Recipes</h2>
       <Results 
+        fromAccount={true}
         recipes={this.state.user.recipes}
         isUserList={true}
         toggleCustomRecipeModal={this.toggleCustomRecipeModal}

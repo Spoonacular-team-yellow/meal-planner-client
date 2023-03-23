@@ -1,0 +1,12 @@
+.username {
+  display: flex;
+  justify-content: flex-end;
+  color: #F1F2F4;
+}
+
+.srecipe {
+  display: flex;
+  justify-content: center;
+  font-size: 4rem;
+  color: #F1F2F4;
+}
