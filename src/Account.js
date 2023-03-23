@@ -75,12 +75,31 @@ class Account extends React.Component {
     })
   };
 
+  insertCustomRecipe = (customRecipe) => {
+    console.log(customRecipe, 'hey');
+    let index = this.state.user.recipes.findIndex(recipe => recipe._id === customRecipe._id);
+    let updatedUser = {...this.state.user};
+    if (index > 0) {
+      updatedUser.recipes[index] = customRecipe;
+      this.setState({
+        user: updatedUser
+      });
+    } else {
+      updatedUser.recipes.push(customRecipe);
+      this.setState({
+        user: updatedUser
+      })
+    }
+    console.log(updatedUser, 'user');
+  }
+
   componentDidMount() {
     this.getToken();
   }
 
   render() {
-    console.log(this.state.user);
+    let test = {...this.state.user};
+    console.log(test);
     return (
       <>
       <h2>{this.state.user.username}</h2>
@@ -93,6 +112,9 @@ class Account extends React.Component {
         setUserRecipe={this.setUserRecipe}
         selectedUserRecipe={this.state.selectedUserRecipe}
         removeRecipe={this.removeRecipe}
+        saveRecipe={this.props.saveRecipe}
+        insertCustomRecipe={this.insertCustomRecipe}
+        token={this.state.token}
       />
       </>
     );

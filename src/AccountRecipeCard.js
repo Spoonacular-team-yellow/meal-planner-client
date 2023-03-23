@@ -11,7 +11,6 @@ class AccountRecipeCard extends React.Component {
         this.props.removeRecipe(this.props.recipe.recipeId);
     }
     render(){
-
         return (
         <Card
             style={{maxWidth: "18rem"}}

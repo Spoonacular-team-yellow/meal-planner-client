@@ -3,6 +3,7 @@ import RecipeCard from "./RecipeCard";
 import AccountRecipeCard from "./AccountRecipeCard";
 import RecipeModal from './RecipeModal';
 import CustomRecipeModal from './CustomRecipeModal';
+import axios from 'axios';
 import './Results.css';
 
 class Results extends React.Component {
@@ -18,9 +19,43 @@ class Results extends React.Component {
       selectedUserRecipe: recipe
     });
   }
+
+  handleCustomRecipe = async (updatedRecipe) => {
+    let result = {};
+    if (Object.hasOwn(updatedRecipe,'_id')) {
+      let config = {
+        method: 'put',
+        baseURL: process.env.REACT_APP_SERVER,
+        url: `/customrecipes/${updatedRecipe._id}`,
+        data: updatedRecipe,
+        headers: {
+          "Authorization": `Bearer ${this.props.token}`
+        }
+      }
+      result = await axios(config);
+    } else {
+      let config = {
+          method: 'post',
+          baseURL: process.env.REACT_APP_SERVER,
+          url: `/customrecipes`,
+          data: updatedRecipe,
+          headers: {
+            "Authorization": `Bearer ${this.props.token}`
+          }
+        }
+        result = await axios(config);
+    }
+    this.props.saveRecipe(result.data);
+    this.props.insertCustomRecipe(result.data);
+  }
+
+  componentDidMount() {
+    this.setState({
+      selectedUserRecipe: {}
+    });
+  }
   
   render() {
-    console.log(this.props.recipes);
     return (
       <>
       <div className="results-div">
@@ -50,6 +85,7 @@ class Results extends React.Component {
             showCustomRecipeModal={this.props.showCustomRecipeModal}
             toggleCustomRecipeModal={this.props.toggleCustomRecipeModal}
             selectedUserRecipe={this.state.selectedUserRecipe}
+            handleCustomRecipe={this.handleCustomRecipe}
           />
           :
            <RecipeModal 

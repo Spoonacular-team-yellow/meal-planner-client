@@ -37,34 +37,7 @@ class Main extends React.Component {
       selectedRecipe: results.data
     })
   } 
-
-  saveRecipe = async(recipe)=> {
-    let recipeToSave = {
-      recipeId : recipe.id,
-      steps: recipe.analyzedInstructions,
-      ingredients: recipe.extendedIngredients,
-      imageUrl: recipe.image,
-      title: recipe.title,
-      readyInMinutes: recipe.readyInMinutes,
-      sourceUrl: recipe.sourceUrl,
-      sourceName: recipe.sourceName
-    }
-
-    let config = {
-      method: 'put',
-      baseURL: process.env.REACT_APP_SERVER,
-      url: `/accounts/list/save/${this.props.auth0.user.email}`,
-      data: recipeToSave,
-      headers: {
-        "Authorization": `Bearer ${this.state.token}`
-      }}
-      let results = await axios(config);
-      console.log(results.data)
-    }
   
-
-
-
   getRecipe = async (e) => {
     e.preventDefault();
     let searchData = [
@@ -204,7 +177,7 @@ class Main extends React.Component {
             recipes={this.state.recipe}
             selectedRecipe={this.state.selectedRecipe}
             getOneRecipe={this.getOneRecipe}
-            saveRecipe={this.saveRecipe}
+            saveRecipe={this.props.saveRecipe}
           />
           <RegisterModal
             showRegisterModal={this.state.showRegisterModal}
