@@ -26,6 +26,7 @@ class App extends React.Component {
       readyInMinutes: recipe.readyInMinutes,
       sourceUrl: recipe.sourceUrl,
       sourceName: recipe.sourceName,
+      wasModified: recipe.wasModified,
       _id: recipe._id,
       __v: recipe.__v
     }

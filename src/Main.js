@@ -23,6 +23,7 @@ class Main extends React.Component {
       selectedRecipe: {},
     };
   }
+  
   getOneRecipe = async (id) => {
     let config = {
       method: 'get',

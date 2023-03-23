@@ -3,7 +3,7 @@ import { Modal, Form, Button} from 'react-bootstrap';
 
 class CustomRecipeModal extends React.Component {
 
-clickMe = (e) => {
+handleCustomChanges = (e) => {
     e.preventDefault();
     let ingredients_input = document.querySelectorAll(".customModal-Form input[name='ingredient']");
     let recipe_ingredients = [];
@@ -41,7 +41,7 @@ clickMe = (e) => {
                     <Modal.Title>Customize Recipe</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form className="customModal-Form" onSubmit={this.clickMe}>
+                    <Form className="customModal-Form" onSubmit={this.handleCustomChanges}>
                         <Form.Group controlId="title" >
                             <Form.Label>Title</Form.Label>
                             <Form.Control type="text" defaultValue={this.props.selectedUserRecipe.title}/>
@@ -75,7 +75,7 @@ clickMe = (e) => {
                             <Form.Label>Image Url</Form.Label>
                                 <Form.Control type="text" defaultValue={this.props.selectedUserRecipe.imageUrl}/>
                         </Form.Group>
-                        <Button type="submit">Click</Button>
+                        <Button type="submit">Apply Changes</Button>
                     </Form>
                 </Modal.Body>
             </Modal>
