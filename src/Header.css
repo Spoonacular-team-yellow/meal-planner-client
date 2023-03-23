@@ -1,0 +1,17 @@
+nav {
+    /* background-color: #413dab; */
+    border-bottom: 1px solid black;
+    margin-bottom: 3rem;
+    background-color: #455d7a;
+    color: white !important;
+}
+
+
+.navbar-brand {
+    margin-left: 2.5rem;
+    color: white !important;
+}
+.nav-link {
+    color: white !important;
+
+}
