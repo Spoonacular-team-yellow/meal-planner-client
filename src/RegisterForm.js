@@ -14,7 +14,6 @@ class RegisterForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e.target.username.value);
         this.props.createUser(e.target.username.value);
         this.props.toggleRegisterModal();
     };

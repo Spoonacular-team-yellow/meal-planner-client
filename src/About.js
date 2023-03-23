@@ -5,7 +5,6 @@ import "./About.css"
 class Profile extends Component {
 
   render() {
-    /* TODO: render information about the developers */
     return(
       <Container>
 

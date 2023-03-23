@@ -23,8 +23,7 @@ class Results extends React.Component {
   handleCustomRecipe = async (updatedRecipe) => {
     let result = {};
     let config ={};
-    console.log(updatedRecipe);
-    console.log(updatedRecipe.wasModified);
+
     if (Object.hasOwn(updatedRecipe, 'wasModified') && updatedRecipe.wasModified === true) {
       console.log('there');
       config = {
