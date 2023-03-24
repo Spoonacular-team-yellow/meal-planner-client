@@ -3,6 +3,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 import { withAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
+import { PersonCircle } from 'react-bootstrap-icons';
 
 import './Header.css';
 
@@ -62,12 +63,17 @@ class Header extends React.Component {
               <Nav.Link className="nav-link">About Us</Nav.Link>
               </LinkContainer>
             </Nav.Item>
-            <Nav.Item>
+            <Nav.Item className="d-lg-none" style={{margin: "0 auto"}}>
               <LinkContainer to="/account">
-              <Nav.Link className="nav-link">Hi {this.state.user.username}! </Nav.Link>
+              <Nav.Link className="nav-link"><div className="d-flex align-items-center" style={{gap:"0.8em"}}><PersonCircle size={20} /> <span>Hi {this.state.user.username}!</span></div></Nav.Link>
               </LinkContainer>
             </Nav.Item>
           </Nav>
+        <Nav.Item className="d-lg-flex d-none" style={{marginRight:"4em"}}>
+            <LinkContainer to="/account">
+            <Nav.Link className="nav-link"><div className="d-flex align-items-center justify-content-between" style={{gap:"0.8em"}}><PersonCircle size={20} /> <span>Hi {this.state.user.username}!</span></div></Nav.Link>
+            </LinkContainer>
+          </Nav.Item>
         </Navbar.Collapse>
       </Navbar>
     )
