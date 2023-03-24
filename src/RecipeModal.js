@@ -17,7 +17,7 @@ class RecipeModal extends React.Component{
   }
   render(){
     let recipe = this.props.accountCardModal ? this.props.selectedUserRecipe : this.props.selectedRecipe
-
+    console.log(recipe);
     return (
       <>
         <Modal
@@ -71,9 +71,16 @@ class RecipeModal extends React.Component{
             {
               this.props.accountCardModal && recipe.ingredients &&
               <>
-              {
-                recipe.ingredients.map((ingredient, idx)=>{
-                  return <li key={idx}>{ingredient.original}</li>
+              {recipe._id 
+                ? recipe.ingredients.map((ingredient, idx) => {
+                  return (
+                    <li key={idx}>{ingredient}</li>
+                  )
+                })
+                : recipe.ingredients.map((ingredient, idx)=>{
+                  return (
+                    <li key={idx}>{ingredient.original}</li>
+                  )
                 })
               }
               </>
@@ -92,11 +99,18 @@ class RecipeModal extends React.Component{
               }
               { this.props.accountCardModal && recipe.steps &&
                 <>
-                {recipe.steps[0].steps.map((step, idx) => {
-                  return (
-                    <li key={idx}>{step.step}</li>
-                  )
-                })}
+                {recipe._id 
+                  ? recipe.steps.map((step, idx) => {
+                    return (
+                      <li key={idx}>{step}</li>
+                    )
+                  })
+                  : recipe.steps[0].steps.map((step, idx) => {
+                    return (
+                      <li key={idx}>{step.step}</li>
+                    )
+                  })
+              }
                 </>
               }
             </ol>
