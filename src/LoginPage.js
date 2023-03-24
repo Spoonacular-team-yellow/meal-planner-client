@@ -8,15 +8,17 @@ class LoginPage extends React.Component {
     render() {
         return (
             <>
+            <div className="login-container">
                 <section className='login'>
                     <h1>Welcome to GrubGuide</h1>
-                    <p>Please login into your account.</p>
+                    <p className="mb-4">Please login into your account.</p>
                     {
                         !this.props.auth0.isAuthenticated
                         &&
                         <LoginButton />
                     }
                 </section>
+            </div>
             </>
         );
     }

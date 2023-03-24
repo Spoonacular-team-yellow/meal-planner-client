@@ -42,12 +42,12 @@ handleCustomChanges = (e) => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form className="customModal-Form" onSubmit={this.handleCustomChanges}>
-                        <Form.Group controlId="title" >
-                            <Form.Label>Title</Form.Label>
+                        <Form.Group className="mb-3" controlId="title" >
+                            <Form.Label style={{fontWeight: "bold"}}>Title</Form.Label>
                             <Form.Control type="text" defaultValue={this.props.selectedUserRecipe.title}/>
                         </Form.Group>
-                        <Form.Group controlId="ingredients" >
-                            <Form.Label>Ingredients</Form.Label>
+                        <Form.Group className="mb-3"  controlId="ingredients" >
+                            <Form.Label style={{fontWeight: "bold"}}>Ingredients</Form.Label>
                            {this.props.selectedUserRecipe.ingredients && 
                            Object.hasOwn(this.props.selectedUserRecipe, '_id') ?
                            this.props.selectedUserRecipe.ingredients.map((ingredient, idx) => {
@@ -59,8 +59,8 @@ handleCustomChanges = (e) => {
                             })
                             }
                         </Form.Group>
-                        <Form.Group controlId="steps" >
-                            <Form.Label>Instructions</Form.Label>
+                        <Form.Group className="mb-3" controlId="steps" >
+                            <Form.Label style={{fontWeight: "bold"}}>Instructions</Form.Label>
                            {this.props.selectedUserRecipe.steps && 
                            Object.hasOwn(this.props.selectedUserRecipe, '_id') ? 
                            this.props.selectedUserRecipe.steps.map((step, idx) => {
@@ -71,8 +71,8 @@ handleCustomChanges = (e) => {
                            })
                            }
                         </Form.Group>
-                        <Form.Group controlId="imageUrl" >
-                            <Form.Label>Image Url</Form.Label>
+                        <Form.Group className="mb-3" controlId="imageUrl" >
+                            <Form.Label style={{fontWeight: "bold"}}>Image Url</Form.Label>
                                 <Form.Control type="text" defaultValue={this.props.selectedUserRecipe.imageUrl}/>
                         </Form.Group>
                         <Button type="submit">Apply Changes</Button>

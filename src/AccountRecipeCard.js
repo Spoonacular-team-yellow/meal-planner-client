@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Button, Badge} from "react-bootstrap";
 import axios from "axios";
 import { withAuth0 } from '@auth0/auth0-react';
+import { Trash } from 'react-bootstrap-icons';
 
 
 class AccountRecipeCard extends React.Component {
@@ -52,20 +53,21 @@ class AccountRecipeCard extends React.Component {
               variant="top"
               onClick={this.handleClick}
               src={this.props.recipe.imageUrl}
+              style={{cursor: "pointer"}}
             />
             <Card.Body>
               <Card.Title>
                 {Object.hasOwn(this.props.recipe, 'wasModified') &&
-                    <Badge pill bg="success">Custom Recipe</Badge>
+                    <Badge className="mb-3" pill bg="success">Custom Recipe</Badge>
                 }
                 <br />
                 {this.props.recipe.title}
                 </Card.Title>
+                <div className="d-flex justify-content-between mt-4">
+                    <Button onClick={this.handleCustom}>Customize</Button>
+                    <Trash style={{cursor: "pointer"}} onClick={this.handleRemove} color="grey" size={35}/>
+                </div>
             </Card.Body>
-            <Card.Footer>
-                <Button onClick={this.handleCustom}>Customize</Button>
-                <Button onClick={this.handleRemove}>Remove</Button>
-            </Card.Footer>
         </Card>
         );
     };
