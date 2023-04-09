@@ -2,18 +2,12 @@ import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 import { withAuth0 } from '@auth0/auth0-react';
+import LogoutButton from './LogoutButton';
 import axios from 'axios';
 
 import './Header.css';
 
 class Header extends React.Component {
-  constructor(props){
-    super(props)
-    this.state={
-      user:{}
-    }
-  }
-
   loggedUser = async () => {
     let email = this.props.auth0.user.email;
     let token = await this.getToken();
@@ -26,9 +20,7 @@ class Header extends React.Component {
       }
     }
     let result = await axios(config);
-    this.setState({
-      user: result.data[0]
-    })
+    this.props.setUser(result.data[0]);
   }
 
   getToken = async() => {
@@ -42,7 +34,6 @@ class Header extends React.Component {
 
   componentDidMount() {
     this.loggedUser();
-    console.log(this.state.user);
   }
 
   render() {
@@ -62,11 +53,16 @@ class Header extends React.Component {
               <Nav.Link className="nav-link">About Us</Nav.Link>
               </LinkContainer>
             </Nav.Item>
-            <Nav.Item>
-              <LinkContainer to="/account">
-              <Nav.Link className="nav-link">Hi {this.state.user.username}! </Nav.Link>
-              </LinkContainer>
-            </Nav.Item>
+            {this.props.user?.username &&
+              <>
+              <Nav.Item>
+                <LinkContainer to="/account">
+                <Nav.Link className="nav-link">Hi {this.props.user.username}! </Nav.Link>
+                </LinkContainer>
+              </Nav.Item>
+              <LogoutButton />
+              </>
+            }
           </Nav>
         </Navbar.Collapse>
       </Navbar>

@@ -14,8 +14,12 @@ import axios from 'axios';
 import './App.css';
 
 class App extends React.Component {
-
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {}
+    };
+  }
 
   saveRecipe = async(recipe)=> {
     let token = await this.getToken();
@@ -70,20 +74,27 @@ class App extends React.Component {
     }
   }
 
+  setUser = (user) => {
+    this.setState({
+      user: user
+    });
+    console.log(this.state.user);
+  }
 
   render() {
-
+    console.log('hit');
+    console.log(this.state.user);
     return (
       <>
       <Router>
-          {this.props.auth0.isAuthenticated 
+          {this.props.auth0.isAuthenticated
           &&
-          <Header />
+          <Header user={this.state.user} setUser={this.setUser}/>
           }
           <Routes>
           <Route 
               exact path="/"
-              element={this.props.auth0.isAuthenticated ? <Main saveRecipe={this.saveRecipe} auth={this.props.auth0}/> : <LoginPage />}
+              element={this.props.auth0.isAuthenticated ? <Main saveRecipe={this.saveRecipe} auth={this.props.auth0} setUser={this.setUser}/> : <LoginPage />}
             >
             </Route>
             <Route 

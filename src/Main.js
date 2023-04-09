@@ -7,8 +7,6 @@ import { withAuth0 } from '@auth0/auth0-react';
 import RegisterModal from './RegisterModal';
 import './Main.css'
 
-
-
 const SERVER = process.env.REACT_APP_SERVER;
 class Main extends React.Component {
 
@@ -95,7 +93,6 @@ class Main extends React.Component {
       email: this.props.auth0.user.email,
       recipes: []
     }
-    console.log(newUser);
     let config = {
       method: 'post',
       baseURL: process.env.REACT_APP_SERVER,
@@ -106,6 +103,10 @@ class Main extends React.Component {
       }
     };
     let createdUser = await axios(config);
+    this.setState({
+      user: createdUser.data
+    });
+    this.props.setUser(createdUser.data);
     console.log('user created: ', createdUser)
   }
 
