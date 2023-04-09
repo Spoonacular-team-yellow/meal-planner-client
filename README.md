@@ -3,6 +3,8 @@
 
 [Live site](https://lucky-fenglisu-5de387.netlify.app/)
 
+[Background image](https://unsplash.com/photos/wMzx2nBdeng) courtesy of Brooke Lark on Unsplash.
+
 ***
 
 ## Collaborators
