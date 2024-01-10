@@ -11,6 +11,8 @@ This app aims to help users with their meal planning by allowing them to search 
 
 * pw: Test123#
 
+* NOTE: Site is hosted on a free Render instance, so may take several seconds for search to become functional as the service is spinned back up.
+
 [Background image](https://unsplash.com/photos/wMzx2nBdeng) courtesy of Brooke Lark on Unsplash.
 
 ## User Stories
